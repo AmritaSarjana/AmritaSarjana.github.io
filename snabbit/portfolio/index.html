@@ -71,7 +71,7 @@ h1 em{font-style:normal;color:var(--brand)}
 .cta{display:flex;flex-wrap:wrap;gap:10px}
 
 /* phone card */
-.app{width:100%;max-width:350px;justify-self:center;background:#fff;border:9px solid #1C1424;border-radius:46px;overflow:hidden;position:relative;height:700px;
+.app{width:100%;max-width:350px;justify-self:center;background:#fff;border:9px solid #1C1424;border-radius:46px;overflow:hidden;position:relative;height:850px;
   box-shadow:0 40px 80px -40px rgba(234,57,130,.6);font-size:13px;line-height:1.35}
 .scr{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none;background:#fff}
 .scr::-webkit-scrollbar{display:none}
@@ -80,17 +80,28 @@ h1 em{font-style:normal;color:var(--brand)}
 .sbar i{display:inline-block;width:22px;height:11px;border:1.5px solid currentColor;border-radius:4px;margin-left:6px;vertical-align:-1px;position:relative}
 .sbar i::after{content:"";position:absolute;inset:1.5px 6px 1.5px 1.5px;background:currentColor;border-radius:1.5px}
 /* home */
-.h-hero{background:radial-gradient(120% 90% at 80% 10%,#FF9CC4,transparent 60%),linear-gradient(160deg,#C81D66,#EA3982 55%,#F7A8C8);color:#fff;margin-top:-36px;padding:48px 18px 0;height:250px;position:relative;display:flex;flex-direction:column}
-.h-loc b{font-size:17px;display:block}.h-loc span{opacity:.85;font-size:12px}
-.gift{position:absolute;right:14px;top:40px;display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
-.gift i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center;font-style:normal;font-size:18px}
-.gift span{background:#fff;color:var(--good);font-weight:800;font-size:11px;padding:2px 8px;border-radius:999px;border:1.5px solid var(--good)}
-.h-title{font-size:23px;font-weight:800;letter-spacing:-.03em;text-align:center;margin:20px 0 0;line-height:1.15}
-.h-big{margin:auto auto 0;width:96px;height:84px;border-radius:34px 34px 0 0;background:rgba(255,255,255,.22);display:grid;place-items:center;font:800 34px/1 var(--f);letter-spacing:-.04em}
-.cats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:-30px;position:relative}
-.cats button{font:700 12.5px var(--f);border:0;background:#F6EEF2;color:var(--muted);padding:10px 4px 10px;border-radius:16px 16px 0 0;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
-.cats button.on{background:#fff;color:var(--ink)}
-.cats button i{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--chip);display:grid;place-items:center;font-size:11px}
+.h-top{background:var(--brand);color:#fff;margin-top:0;flex:none}
+.h-top .sbar{color:#fff}
+.h-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px 14px}
+.h-loc{min-width:0}.h-loc b{font-size:17px;display:block}.h-loc span{opacity:.9;font-size:11.5px;white-space:nowrap}
+.gift{display:flex;align-items:center;gap:6px;text-decoration:none;flex:none}
+.gift i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center;font-style:normal;font-size:16px}
+.gift span{background:#fff;color:var(--good);font-weight:800;font-size:11px;padding:4px 9px;border-radius:999px;border:1.5px solid var(--good)}
+.h-map{position:relative;height:280px;flex:none;overflow:hidden}
+.h-map svg{position:absolute;inset:0;width:100%;height:100%}
+.hat{position:absolute;font:700 13px var(--f);color:var(--ink);background:#fff;border:0;border-radius:16px;padding:7px 11px 7px 7px;display:flex;align-items:center;gap:7px;cursor:pointer;
+  box-shadow:0 6px 16px -8px rgba(28,20,36,.35);transition:transform .15s}
+.hat::after{content:"";position:absolute;left:50%;bottom:-16px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--brand);border:2px solid #fff}
+.hat i{font-style:normal;width:26px;height:26px;border-radius:8px;background:var(--chip);display:grid;place-items:center;font-size:12px;color:var(--brand-ink);font-weight:800}
+.hat:hover,.hat.on{transform:translateY(-2px);box-shadow:0 0 0 2px var(--brand),0 8px 18px -8px rgba(234,57,130,.6)}
+.me{position:absolute;left:50%;top:58px;transform:translateX(-50%);width:84px;height:104px}
+.halo{position:absolute;left:50%;top:70px;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:radial-gradient(circle,rgba(234,57,130,.22),rgba(234,57,130,.08) 55%,transparent 70%)}
+.mepin{position:absolute;left:0;top:0;width:84px;height:84px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#fff;border:3px solid var(--brand);display:grid;place-items:center;box-shadow:0 10px 20px -10px rgba(234,57,130,.7)}
+.mepin img{width:64px;height:64px;border-radius:50%;object-fit:cover;transform:rotate(45deg);display:block}
+.me::after{content:"";position:absolute;left:50%;top:98px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--brand);border:2px solid #fff}
+.h-card{position:absolute;left:24px;right:24px;bottom:14px;background:rgba(255,255,255,.95);border-radius:24px;padding:14px 12px;text-align:center;box-shadow:0 14px 30px -18px rgba(28,20,36,.35)}
+.h-card b{display:block;font-size:24px;line-height:1.08;letter-spacing:-.035em;font-weight:800}
+.h-card span{display:block;margin-top:6px;color:var(--muted);font-size:13px;font-weight:600}
 .duo{display:grid;grid-template-columns:.85fr 1.15fr;gap:10px;padding:14px 14px 0}
 .tile{border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:3px;text-align:left;background:#fff;font:inherit;color:inherit;cursor:pointer;position:relative;overflow:hidden}
 .tile b{font-size:16px;letter-spacing:-.02em}.tile b::after{content:" ›";color:var(--muted)}
@@ -107,7 +118,7 @@ h1 em{font-style:normal;color:var(--brand)}
 .pack .buy s{opacity:.7;font-weight:600}
 .pack small{color:var(--muted);font-size:11.5px}.pack small b{color:var(--good)}
 .tix{height:64px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#FF6FA6);color:#fff;display:flex;align-items:center;justify-content:center;font:800 10px/1.1 var(--f);text-align:center;letter-spacing:.04em;transform:rotate(-8deg);box-shadow:0 8px 16px -8px var(--brand);border:2px dashed rgba(255,255,255,.6)}
-.h-more{padding:14px 14px 84px}
+.h-more{padding:12px 14px 84px}
 .h-more h4{margin:0 0 8px;font-size:16px}
 .h-more .row{display:flex;gap:8px}
 .h-more .row div{flex:1;border-radius:14px;background:var(--surface);border:1px solid var(--line);padding:10px;font-size:11.5px;color:var(--muted)}
@@ -304,17 +315,27 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
     <div class="app" id="app" aria-label="Amrita's profile shown as a booking app">
       <!-- HOME SCREEN -->
       <div class="scr" id="scr-home">
-        <div class="sbar" style="color:#fff"><span>9:41</span><span><i></i></span></div>
-        <div class="h-hero">
-          <div class="h-loc"><b>Bengaluru ▾</b><span>Open to founder's office roles</span></div>
-          <a class="gift" href="../casestudy/" title="Read my Snabbit case study"><i>🎁</i><span>Case study</span></a>
-          <p class="h-title">One generalist<br>that does it all</p>
-          <div class="h-big">AS</div>
+        <div class="h-top">
+          <div class="sbar"><span>9:41</span><span><i></i></span></div>
+          <div class="h-bar">
+            <div class="h-loc"><b>Bengaluru ▾</b><span>Open to founder's office roles</span></div>
+            <a class="gift" href="../casestudy/" title="Read my Snabbit case study"><i>🎁</i><span>Case study</span></a>
+          </div>
         </div>
-        <div class="cats" role="group" aria-label="Skill">
-          <button type="button" class="on" data-c="0"><i>🛠</i>Tech</button>
-          <button type="button" data-c="1"><i>📈</i>Growth</button>
-          <button type="button" data-c="2"><i>📦</i>Ops</button>
+        <div class="h-map">
+          <svg viewBox="0 0 332 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="332" height="300" fill="#F8EEF2"/>
+            <g fill="#DDF0DA"><path d="M0 40 q30 -10 50 20 t-10 60 q-30 10 -40 -10z"/><path d="M250 130 q40 -10 60 30 t-20 60 q-40 0 -50 -40z"/><path d="M110 250 q30 -20 70 0 t10 50 h-90z"/></g>
+            <g fill="#D7E9F7"><path d="M280 20 q30 0 40 30 q-10 30 -40 20 q-20 -20 0 -50z"/><circle cx="40" cy="250" r="18"/></g>
+            <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M-10 110 C80 100 200 140 340 120"/><path d="M90 -10 C100 90 120 200 100 310"/><path d="M230 -10 C220 100 250 200 240 310"/><path d="M-10 230 C100 220 220 240 340 210"/></g>
+            <g fill="none" stroke="#fff" stroke-width="3"><path d="M20 160 L80 170 M140 40 L200 60 M150 180 L210 170 M260 260 L320 250 M30 20 L60 80 M180 100 L190 160"/></g>
+          </svg>
+          <button type="button" class="hat" data-c="0" style="left:24px;top:18px"><i>🖥</i>Product</button>
+          <button type="button" class="hat" data-c="1" style="right:20px;top:18px"><i>📈</i>Growth</button>
+          <button type="button" class="hat" data-c="2" style="left:12px;top:118px"><i>&lt;/&gt;</i>Tech</button>
+          <button type="button" class="hat" data-c="3" style="right:14px;top:100px"><i>📦</i>Ops</button>
+          <div class="me"><span class="halo"></span><span class="mepin"><img src="amrita.jpg" alt="Amrita Sarjana" width="64" height="64"></span></div>
+          <div class="h-card"><b>One generalist.<br>Four hats.</b><span id="hat-line">Product · Growth · Tech · Ops</span></div>
         </div>
         <div class="duo">
           <a class="tile" href="#book" style="text-decoration:none"><span class="clk"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="#EA3982"/><path d="M9 4.5V9h3.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><b>Schedule</b><span>a chat this week</span></a>
@@ -322,7 +343,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
             <i class="pin" style="right:18px;top:16px"></i><i class="pin" style="right:44px;top:48px"></i><i class="pin" style="right:12px;top:70px"></i></button>
         </div>
         <div class="pack">
-          <div><h4>Founder Pack</h4><span class="buy">Hire 1 <s>for 4</s></span><br><small>Strategy + Growth + Ops + <b>Product</b></small></div>
+          <div><h4>Founder Pack</h4><span class="buy">Hire 1 for 4</span><br><small>Strategy + Growth + Ops + <b>Product</b></small></div>
           <div class="tix">AMRITA<br>4-IN-1<br>PACK</div>
         </div>
         <div class="h-more">
@@ -586,8 +607,10 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
   // app mock
   function screen(n){$("#scr-home").hidden=n!=="home";$("#scr-book").hidden=n!=="book";$(".hint").innerHTML=n==="home"?"Tap <b>Instant</b> to book":"Pick an engagement, then <b>Continue</b>";}
   document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){screen(b.dataset.go);});});
-  var CAT=["from day one","CAC to LTV, fast","boxes to sofas"];
-  document.querySelectorAll(".cats button").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".cats button").forEach(function(x){x.classList.toggle("on",x===b);});$("#cat-line").textContent=CAT[+b.dataset.c];});});
+  var HAT=[["Product","2 products, 0 → 1"],["Growth","8 more paying in every 100"],["Tech","100K requests/sec, <50 ms"],["Ops","pickups, payments, disputes"]];
+  document.querySelectorAll(".hat").forEach(function(b){b.addEventListener("click",function(){var on=!b.classList.contains("on");
+    document.querySelectorAll(".hat").forEach(function(x){x.classList.remove("on");});
+    if(on){b.classList.add("on");$("#hat-line").textContent=HAT[+b.dataset.c][0]+": "+HAT[+b.dataset.c][1];}else $("#hat-line").textContent="Product · Growth · Tech · Ops";});});
   document.querySelectorAll("#dgrid button").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("#dgrid button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});$("#sel").textContent=b.dataset.d;});});
   $("#addpack").addEventListener("click",function(){var on=this.getAttribute("aria-pressed")!=="true";this.setAttribute("aria-pressed",String(on));this.textContent=on?"Added ✓":"Add";$("#sel2").textContent=on?"+ Founder Pack (4 roles)":"Amrita · Bengaluru";});
 
