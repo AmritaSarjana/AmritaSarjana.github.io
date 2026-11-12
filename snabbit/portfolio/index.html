@@ -59,7 +59,7 @@ h3{font-size:20px;line-height:1.25;font-weight:800;letter-spacing:-.015em}
 .card.soft{background:var(--surface);box-shadow:none}
 
 /* hero */
-.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding-block:56px 72px;position:relative}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;padding-block:56px 72px;position:relative}
 .hero::before{content:"";position:absolute;z-index:-1;right:-10%;top:-30px;width:min(560px,80vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--blush),transparent 66%)}
 @media (max-width:880px){.hero{grid-template-columns:minmax(0,1fr)}}
 .live{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:var(--good-bg);color:var(--good);align-self:flex-start}
@@ -71,16 +71,89 @@ h1 em{font-style:normal;color:var(--brand)}
 .cta{display:flex;flex-wrap:wrap;gap:10px}
 
 /* phone card */
-.phone{max-width:360px;width:100%;justify-self:center;background:var(--paper);border:1px solid var(--line);border-radius:34px;padding:14px;
-  box-shadow:0 40px 80px -40px rgba(234,57,130,.55)}
-.screen{border-radius:24px;background:var(--surface);padding:18px;display:flex;flex-direction:column;gap:14px}
-.status{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--muted)}
-.eta{background:var(--brand);color:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
-.eta small{font-size:12px;font-weight:600;opacity:.85}
-.eta b{font-size:22px;letter-spacing:-.02em}
-.track{height:6px;border-radius:9px;background:rgba(255,255,255,.3);overflow:hidden;margin-top:8px}
-.track i{display:block;height:100%;width:30%;background:#fff;border-radius:9px;animation:go 3.2s ease-in-out infinite alternate}
-@keyframes go{to{width:92%}}
+.app{width:100%;max-width:350px;justify-self:center;background:#fff;border:9px solid #1C1424;border-radius:46px;overflow:hidden;position:relative;height:700px;
+  box-shadow:0 40px 80px -40px rgba(234,57,130,.6);font-size:13px;line-height:1.35}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none;background:#fff}
+.scr::-webkit-scrollbar{display:none}
+.scr[hidden]{display:none}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 0;font-weight:700;font-size:14px;position:relative;z-index:2}
+.sbar i{display:inline-block;width:22px;height:11px;border:1.5px solid currentColor;border-radius:4px;margin-left:6px;vertical-align:-1px;position:relative}
+.sbar i::after{content:"";position:absolute;inset:1.5px 6px 1.5px 1.5px;background:currentColor;border-radius:1.5px}
+/* home */
+.h-hero{background:radial-gradient(120% 90% at 80% 10%,#FF9CC4,transparent 60%),linear-gradient(160deg,#C81D66,#EA3982 55%,#F7A8C8);color:#fff;margin-top:-36px;padding:48px 18px 0;height:250px;position:relative;display:flex;flex-direction:column}
+.h-loc b{font-size:17px;display:block}.h-loc span{opacity:.85;font-size:12px}
+.gift{position:absolute;right:14px;top:40px;display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
+.gift i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center;font-style:normal;font-size:18px}
+.gift span{background:#fff;color:var(--good);font-weight:800;font-size:11px;padding:2px 8px;border-radius:999px;border:1.5px solid var(--good)}
+.h-title{font-size:23px;font-weight:800;letter-spacing:-.03em;text-align:center;margin:20px 0 0;line-height:1.15}
+.h-big{margin:auto auto 0;width:96px;height:84px;border-radius:34px 34px 0 0;background:rgba(255,255,255,.22);display:grid;place-items:center;font:800 34px/1 var(--f);letter-spacing:-.04em}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:-30px;position:relative}
+.cats button{font:700 12.5px var(--f);border:0;background:#F6EEF2;color:var(--muted);padding:10px 4px 10px;border-radius:16px 16px 0 0;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
+.cats button.on{background:#fff;color:var(--ink)}
+.cats button i{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--chip);display:grid;place-items:center;font-size:11px}
+.duo{display:grid;grid-template-columns:.85fr 1.15fr;gap:10px;padding:14px 14px 0}
+.tile{border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:3px;text-align:left;background:#fff;font:inherit;color:inherit;cursor:pointer;position:relative;overflow:hidden}
+.tile b{font-size:16px;letter-spacing:-.02em}.tile b::after{content:" ›";color:var(--muted)}
+.tile span{color:var(--muted);font-size:12px}
+.clk{width:32px;height:32px;border-radius:50%;background:var(--chip);display:grid;place-items:center;margin-bottom:6px}
+.clk i{width:16px;height:16px;border-radius:50%;background:var(--brand);position:relative}
+.clk i::after{content:"";position:absolute;left:7px;top:3px;width:2px;height:6px;background:#fff;box-shadow:2px 4px 0 -0px #fff}
+.zap{align-self:flex-start;border:1.5px solid var(--brand);color:var(--brand);font-weight:800;border-radius:999px;padding:3px 9px;font-size:12.5px;margin-bottom:6px}
+.tile.inst{border-color:#F7C3D8;background:linear-gradient(110deg,#fff 45%,#FFF0F6)}
+.pin{position:absolute;width:9px;height:9px;border-radius:50%;background:#1C1424;box-shadow:3px 3px 0 -1px var(--brand)}
+.pack{margin:12px 14px 0;background:#FDE3EF;border-radius:20px;padding:14px;display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:8px;align-items:center}
+.pack h4{margin:0;font-size:16px;letter-spacing:-.02em}
+.pack .buy{display:inline-block;background:var(--brand);color:#fff;font-weight:800;border-radius:10px;padding:7px 10px;margin:8px 0 6px;font-size:12.5px}
+.pack .buy s{opacity:.7;font-weight:600}
+.pack small{color:var(--muted);font-size:11.5px}.pack small b{color:var(--good)}
+.tix{height:64px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#FF6FA6);color:#fff;display:flex;align-items:center;justify-content:center;font:800 10px/1.1 var(--f);text-align:center;letter-spacing:.04em;transform:rotate(-8deg);box-shadow:0 8px 16px -8px var(--brand);border:2px dashed rgba(255,255,255,.6)}
+.h-more{padding:14px 14px 84px}
+.h-more h4{margin:0 0 8px;font-size:16px}
+.h-more .row{display:flex;gap:8px}
+.h-more .row div{flex:1;border-radius:14px;background:var(--surface);border:1px solid var(--line);padding:10px;font-size:11.5px;color:var(--muted)}
+.h-more .row b{display:block;color:var(--brand);font-size:17px}
+.nav{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:4px;background:rgba(240,236,240,.92);border-radius:999px;padding:5px;z-index:3;box-shadow:0 6px 20px -8px rgba(0,0,0,.25)}
+.nav a,.nav button{font:600 11px var(--f);text-decoration:none;color:var(--ink);padding:7px 14px;border-radius:999px;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;white-space:nowrap}
+.nav .on{background:#1C1424;color:#fff}
+.nav i{font-style:normal;font-size:13px;line-height:1;height:14px}
+/* booking */
+.map{position:relative;height:250px;background:#F3F2F4;margin-top:-36px;flex:none}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.back{position:absolute;left:14px;top:48px;width:38px;height:38px;border-radius:50%;background:#fff;border:0;box-shadow:0 2px 8px rgba(0,0,0,.12);font-size:18px;cursor:pointer;z-index:2}
+.you{position:absolute;left:50%;top:150px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 0 0 14px rgba(234,57,130,.15)}
+.ppl{position:absolute;width:20px;height:20px}
+.ppl::before{content:"";position:absolute;left:5px;top:0;width:10px;height:10px;border-radius:50%;background:#1C1424}
+.ppl::after{content:"";position:absolute;left:1px;top:9px;width:18px;height:9px;border-radius:9px 9px 4px 4px;background:var(--brand)}
+.pick{display:grid;grid-template-columns:.8fr 1.2fr;margin-top:-34px;position:relative;z-index:1}
+.pick > div{border-radius:20px 20px 0 0;padding:20px 8px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.pick .best{background:linear-gradient(#FFF0F6,#fff)}
+.pick .fav{background:#F7F5F7;flex-direction:row;justify-content:space-around}
+.pick .flag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;padding:3px 10px;font-weight:800;font-size:12px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.pick .best .flag{color:var(--brand)}
+.pick .fav .flag{color:var(--muted)}.pick .fav .flag em{font-family:var(--hand);font-size:15px;color:#9a8fa0;margin-right:4px}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(140deg,var(--brand),#FF8DB8);color:#fff;font:800 14px/40px var(--f);text-align:center;border:2px solid #fff;box-shadow:0 0 0 2px var(--blush)}
+.av.g{background:#DCD7DE;box-shadow:none}
+.pick span:not(.av){font-size:11.5px;font-weight:700;background:#fff;border-radius:999px;padding:2px 8px}
+.pick .fav span:not(.av){background:transparent;color:#B7AEBC}
+.pick .fav > i{display:flex;flex-direction:column;align-items:center;gap:4px;font-style:normal}
+.dur{padding:14px 16px 0}
+.dur h4{margin:0 0 10px;font-size:15px;font-weight:600}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dgrid button{font:inherit;color:inherit;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:9px 9px 8px;cursor:pointer;display:flex;flex-direction:column;gap:14px;min-height:78px}
+.dgrid button b{font-size:13.5px;letter-spacing:-.01em}
+.dgrid button span{font-size:11.5px;color:var(--ink);font-weight:600}
+.dgrid button span s{color:#B7AEBC;font-weight:500;margin-left:3px}
+.dgrid button[aria-pressed="true"]{border-color:var(--brand);background:#FFF5FA}
+.fpack{margin:12px 0 0;background:linear-gradient(100deg,#FBC9DE,#FDE3EF);padding:10px 14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center}
+.fpack .lbl{background:#fff;color:var(--brand);border:2px solid var(--brand);border-radius:8px;font:800 10px/1 var(--f);padding:5px 6px;transform:rotate(-6deg);text-align:center}
+.fpack b{font-size:13.5px;display:block}.fpack small{font-size:11px;color:var(--muted)}
+.fpack button{font:700 12px var(--f);background:#1C1424;color:#fff;border:0;border-radius:10px;padding:8px 12px;cursor:pointer}
+.fpack button[aria-pressed="true"]{background:var(--good)}
+.cbar{position:sticky;bottom:0;margin-top:auto;background:#fff;border-top:1px solid var(--line);padding:12px 16px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.cbar b{font-size:15px;display:block;letter-spacing:-.01em}.cbar small{color:var(--muted);font-size:11px}
+.cbar a{background:var(--brand);color:#fff;font-weight:800;text-decoration:none;border-radius:14px;padding:12px 22px;font-size:14px}
+.hint{text-align:center;font-size:12.5px;color:var(--muted);margin-top:12px;font-weight:600}
+.phone-col{display:flex;flex-direction:column;align-items:center}
 .pro{display:flex;gap:12px;align-items:center;background:var(--paper);border-radius:18px;padding:12px}
 .ava{width:52px;height:52px;flex:none;border-radius:16px;background:linear-gradient(140deg,var(--brand),#FF8DB8);color:#fff;font:800 19px/52px var(--f);text-align:center}
 .pro b{display:block;font-size:16px}
@@ -227,25 +300,82 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
       </div>
     </div>
 
-    <div class="phone" aria-label="Profile card">
-      <div class="screen">
-        <div class="status"><span>9:41</span><span>Bengaluru</span></div>
-        <div class="eta">
-          <small>Your generalist is on the way</small>
-          <b>Strategy · Growth · Ops · Product</b>
-          <div class="track"><i></i></div>
+    <div class="phone-col">
+    <div class="app" id="app" aria-label="Amrita's profile shown as a booking app">
+      <!-- HOME SCREEN -->
+      <div class="scr" id="scr-home">
+        <div class="sbar" style="color:#fff"><span>9:41</span><span><i></i></span></div>
+        <div class="h-hero">
+          <div class="h-loc"><b>Bengaluru ▾</b><span>Open to founder's office roles</span></div>
+          <a class="gift" href="../casestudy/" title="Read my Snabbit case study"><i>🎁</i><span>Case study</span></a>
+          <p class="h-title">One generalist<br>that does it all</p>
+          <div class="h-big">AS</div>
         </div>
-        <div class="pro">
-          <div class="ava">AS</div>
-          <div><b>Amrita Sarjana</b><span><span class="stars">★★★★★</span> Engineer · Founder · Generalist</span></div>
+        <div class="cats" role="group" aria-label="Skill">
+          <button type="button" class="on" data-c="0"><i>🛠</i>Tech</button>
+          <button type="button" data-c="1"><i>📈</i>Growth</button>
+          <button type="button" data-c="2"><i>📦</i>Ops</button>
         </div>
-        <div class="mini">
-          <div><b class="num">8+</b><span>years building</span></div>
-          <div><b class="num">6</b><span>companies</span></div>
-          <div><b class="num">2</b><span>products founded</span></div>
+        <div class="duo">
+          <a class="tile" href="#book" style="text-decoration:none"><span class="clk"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="#EA3982"/><path d="M9 4.5V9h3.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><b>Schedule</b><span>a chat this week</span></a>
+          <button type="button" class="tile inst" data-go="book"><span class="zap">⚡ 8+ yrs</span><b>Instant</b><span id="cat-line">from day one</span>
+            <i class="pin" style="right:18px;top:16px"></i><i class="pin" style="right:44px;top:48px"></i><i class="pin" style="right:12px;top:70px"></i></button>
         </div>
-        <div class="tags"><span class="tag">0 → 1</span><span class="tag">Growth</span><span class="tag">Unit economics</span><span class="tag">Team lead</span></div>
+        <div class="pack">
+          <div><h4>Founder Pack</h4><span class="buy">Hire 1 <s>for 4</s></span><br><small>Strategy + Growth + Ops + <b>Product</b></small></div>
+          <div class="tix">AMRITA<br>4-IN-1<br>PACK</div>
+        </div>
+        <div class="h-more">
+          <h4>One generalist who can do it all</h4>
+          <div class="row"><div><b>6</b>companies</div><div><b>2</b>products founded</div><div><b>3.1M+</b>users served</div></div>
+        </div>
+        <nav class="nav" aria-label="App">
+          <button type="button" class="on"><i>⌂</i>Home</button>
+          <a href="#history"><i>☑</i>My Bookings</a>
+          <a href="#book"><i>☺</i>Profile</a>
+        </nav>
       </div>
+
+      <!-- BOOKING SCREEN -->
+      <div class="scr" id="scr-book" hidden>
+        <div class="sbar"><span>9:41</span><span><i></i></span></div>
+        <div class="map">
+          <svg viewBox="0 0 332 250" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"><path d="M-10 196 C80 186 150 190 340 168"/><path d="M262 -10 C270 80 290 140 300 260"/><path d="M60 -10 L70 200"/></g>
+            <g fill="none" stroke="#DCD8DE" stroke-width="2"><path d="M110 40 h70 v50 h-70z"/><path d="M200 70 h40 v60 h-40z"/><path d="M20 60 h30 v80"/><path d="M130 120 v60"/><path d="M180 20 v40"/><path d="M90 140 h90"/></g>
+            <text x="18" y="184" font-size="11" fill="#8A7F90" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">Electronic City Rd</text>
+            <text x="250" y="120" font-size="11" fill="#8A7F90" font-family="Plus Jakarta Sans,sans-serif" font-weight="600" transform="rotate(80 250 120)">Hosur Rd</text>
+          </svg>
+          <button type="button" class="back" data-go="home" aria-label="Back to home">←</button>
+          <i class="ppl" style="left:40px;top:120px"></i><i class="ppl" style="left:110px;top:150px"></i><i class="ppl" style="left:160px;top:70px"></i>
+          <i class="ppl" style="left:230px;top:60px"></i><i class="ppl" style="left:250px;top:84px"></i><i class="ppl" style="left:290px;top:90px"></i>
+          <i class="you"></i>
+        </div>
+        <div class="pick">
+          <div class="best"><span class="flag">⚡ Ready now</span><span class="av">AS</span><span>Best Available</span></div>
+          <div class="fav"><span class="flag"><em>others</em>Sold Out</span>
+            <i><span class="av g"></span><span>—</span></i><i><span class="av g"></span><span>—</span></i><i><span class="av g"></span><span>—</span></i></div>
+        </div>
+        <div class="dur">
+          <h4>Select engagement</h4>
+          <div class="dgrid" id="dgrid">
+            <button type="button" data-d="Intro chat · free" aria-pressed="true"><b>30 min</b><span>Intro chat</span></button>
+            <button type="button" data-d="1 week · audit + plan"><b>1 week</b><span>Audit + plan</span></button>
+            <button type="button" data-d="2 weeks · first test live"><b>2 weeks</b><span>First test live</span></button>
+            <button type="button" data-d="1 month · a metric moved"><b>1 month</b><span>Metric moved</span></button>
+            <button type="button" data-d="3 months · a function owned"><b>3 months</b><span>Function owned</span></button>
+            <button type="button" data-d="Full-time · Founder's Office"><b>Full-time</b><span>Founder's Office</span></button>
+          </div>
+        </div>
+        <div class="fpack">
+          <span class="lbl">FOUNDER<br>PACK</span>
+          <div><b>4 roles for 1 hire</b><small>Strategy · Growth · Ops · Product</small></div>
+          <button type="button" id="addpack" aria-pressed="false">Add</button>
+        </div>
+        <div class="cbar"><div><b id="sel">Intro chat · free</b><small id="sel2">Amrita · Bengaluru</small></div><a href="#book">Continue</a></div>
+      </div>
+    </div>
+    <p class="hint">Tap <b>Instant</b> to book</p>
     </div>
   </section>
 
@@ -451,6 +581,15 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
 <script>
 (function(){
   var $=function(s){return document.querySelector(s);};
+
+
+  // app mock
+  function screen(n){$("#scr-home").hidden=n!=="home";$("#scr-book").hidden=n!=="book";$(".hint").innerHTML=n==="home"?"Tap <b>Instant</b> to book":"Pick an engagement, then <b>Continue</b>";}
+  document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){screen(b.dataset.go);});});
+  var CAT=["from day one","CAC to LTV, fast","boxes to sofas"];
+  document.querySelectorAll(".cats button").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".cats button").forEach(function(x){x.classList.toggle("on",x===b);});$("#cat-line").textContent=CAT[+b.dataset.c];});});
+  document.querySelectorAll("#dgrid button").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("#dgrid button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});$("#sel").textContent=b.dataset.d;});});
+  $("#addpack").addEventListener("click",function(){var on=this.getAttribute("aria-pressed")!=="true";this.setAttribute("aria-pressed",String(on));this.textContent=on?"Added ✓":"Add";$("#sel2").textContent=on?"+ Founder Pack (4 roles)":"Amrita · Bengaluru";});
 
   // services
   var SVC={
