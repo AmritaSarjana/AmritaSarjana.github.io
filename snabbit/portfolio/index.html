@@ -21,7 +21,8 @@
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--f);
-  padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
 .wrap{max-width:1100px;margin:0 auto}
@@ -34,7 +35,7 @@ p{margin:0}
 .hand{font-family:var(--hand);font-weight:700;color:var(--brand-ink);font-size:24px;line-height:1.1;letter-spacing:0}
 
 /* header */
-header.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
   margin-inline:calc(-1 * max(16px,env(safe-area-inset-left)));padding-inline:max(16px,env(safe-area-inset-left))}
 .top .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
 .logo{font:800 22px/1 var(--f);letter-spacing:-.04em;text-decoration:none}
@@ -127,7 +128,7 @@ h1 em{font-style:normal;color:var(--brand)}
 .st{width:20px;height:14px;flex:none}
 .bars{display:flex;flex-direction:column;gap:10px}
 .bar{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center;font-size:13px;font-weight:700}
-.bar .b{height:26px;border-radius:8px;background:var(--brand);display:flex;align-items:center;padding-inline:8px;color:#fff;font-size:12px;width:0;min-width:0;white-space:nowrap;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.bar .b{height:26px;border-radius:8px;background:var(--brand);display:flex;align-items:center;padding-inline:8px;color:#fff;font-size:12px;min-width:62px;white-space:nowrap;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
 .bar .b.go{min-width:62px}
 .bar .b.alt{background:var(--lav);color:var(--lav-ink)}
 .cal{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;max-width:340px}
@@ -166,8 +167,9 @@ h1 em{font-style:normal;color:var(--brand)}
 .dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:4px}
 .dots i{aspect-ratio:1;border-radius:50%;background:var(--line)}
 .dots i.base{background:#C9BFCF}
-.dots i.up{background:var(--brand);transform:scale(0);transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
-.dots.go i.up{transform:scale(1)}
+.dots i.up{background:var(--brand)}
+.dots.go i.up{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes pop{from{transform:scale(.3)}}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
 .coins{display:flex;flex-direction:column;gap:12px}
@@ -193,8 +195,6 @@ main{overflow-x:clip}
 .book .slot .btn{width:100%}
 .email{font-weight:700;user-select:all;word-break:break-all}
 footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin-top:72px}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
-.reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
@@ -289,8 +289,8 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
         <article class="card lesson">
           <div class="q"><b>Q2</b><h3>How fast is “under 50 milliseconds”?</h3></div>
           <div class="bars" id="speed">
-            <div class="bar"><span>An eye blink</span><div class="b alt" data-w="100">~300 ms</div></div>
-            <div class="bar"><span>Winuall API reply</span><div class="b" data-w="16.7">&lt;50 ms</div></div>
+            <div class="bar"><span>An eye blink</span><div class="b alt" style="width:100%">~300 ms</div></div>
+            <div class="bar"><span>Winuall API reply</span><div class="b" style="width:16.7%">&lt;50 ms</div></div>
           </div>
           <p class="small muted">And it did that for 100,000+ requests every second: like a full stadium all asking a question at once, and every one answered before anyone could blink.</p>
           <p class="ans">Answer: <strong>about 6× faster than a blink.</strong></p>
@@ -321,37 +321,37 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
       <p class="lead">From automating reports to running my own companies. Each one taught me a different way to build.</p>
     </div>
     <div class="orders">
-      <article class="card order reveal">
+      <article class="card order">
         <div class="logo-b" style="background:#EA3982">DS</div>
         <div><p class="when">2026 – now · Founder</p><h3>Daily Status</h3><p>Built India's-languages content app with a team of one plus AI coding agents. Owned the full subscription journey: ads, onboarding, paywall, pricing, renewals, win-back.</p>
           <div class="outcome"><span>100K+ downloads</span><span>20K+ transactions</span><span>Multiple regional languages</span></div></div>
         <span class="done now">● In progress</span>
       </article>
-      <article class="card order reveal">
+      <article class="card order">
         <div class="logo-b" style="background:#8F7DF2">TZ</div>
         <div><p class="when">2025 · Founder</p><h3>Truzell</h3><p>A marketplace that made strangers trust each other when selling used goods during a move. Shipped iOS and Android end to end, then ran growth through Meta Ads, SEO and referrals.</p>
           <div class="outcome"><span>10K+ downloads</span><span>20+ orders delivered</span><span>iOS + Android</span></div></div>
         <span class="done">✓ Completed</span>
       </article>
-      <article class="card order reveal">
+      <article class="card order">
         <div class="logo-b" style="background:#1C1424">IQ</div>
         <div><p class="when">2022 – 2026 · Technical lead</p><h3>IQVIA</h3><p>Re-architected a translation platform into microservices on Kubernetes and Azure, with a multi-engine layer routing across OpenAI, Google, DeepL, Microsoft and in-house models.</p>
           <div class="outcome"><span>1M+ users</span><span>~50% higher accuracy</span><span>60% faster deploys</span><span>Led 8 engineers</span></div></div>
         <span class="done">✓ Completed</span>
       </article>
-      <article class="card order reveal">
+      <article class="card order">
         <div class="logo-b" style="background:#0F8A5F">WN</div>
         <div><p class="when">2021 · Engineer</p><h3>Winuall</h3><p>Scaled an ed-tech platform across content, payments, notifications, parent dashboards and live classes.</p>
           <div class="outcome"><span>2M+ users</span><span>100K+ requests/sec</span><span>&lt;50 ms latency</span></div></div>
         <span class="done">✓ Completed</span>
       </article>
-      <article class="card order reveal">
+      <article class="card order">
         <div class="logo-b" style="background:#C81D66">YA</div>
         <div><p class="when">2020 · Engineer</p><h3>Yellow.ai</h3><p>Conversational AI on Web, WhatsApp, Teams and Zendesk for Asian Paints, Aditya Birla and Pepsi, plus the data pipelines behind it.</p>
           <div class="outcome"><span>+50% engagement</span><span>90% faster responses</span></div></div>
         <span class="done">✓ Completed</span>
       </article>
-      <article class="card order reveal">
+      <article class="card order">
         <div class="logo-b" style="background:#5A44D4">TX</div>
         <div><p class="when">2018 · Engineer</p><h3>Tracxn</h3><p>Built the Export MIS platform and client credit ledger.</p>
           <div class="outcome"><span>50+ hours/month saved</span><span>~70% faster reports</span><span>40% fewer invoice errors</span></div></div>
@@ -406,7 +406,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
         <h3>A paying user is worth 2.5× what it costs to find them.</h3>
         <svg class="seesaw" viewBox="0 0 420 200" role="img" aria-label="See-saw: customer lifetime value of 1,050 rupees outweighs the 419 rupee cost to acquire a customer.">
           <polygon points="210,190 186,150 234,150" fill="#C9BFCF"/>
-          <g id="plank" style="transform-origin:210px 148px;transition:transform 1.2s cubic-bezier(.3,1.4,.5,1)">
+          <g id="plank" style="transform-origin:210px 148px;transform:rotate(-9deg)">
             <rect x="30" y="142" width="360" height="12" rx="6" fill="#1C1424"/>
             <rect x="52" y="74" width="104" height="68" rx="16" fill="#EA3982"/>
             <text x="104" y="104" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">They pay</text>
@@ -495,15 +495,13 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
 
   // animations on scroll
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;
-    if(el.id==="speed")el.querySelectorAll(".b").forEach(function(b){b.style.width=b.dataset.w+"%";b.classList.add("go");});
-    else if(el.id==="dots")el.classList.add("go");
-    else if(el.classList.contains("seesaw"))$("#plank").style.transform="rotate(-9deg)";
-    else el.classList.add("in");
+    el.classList.add("go");
     io.unobserve(el);});},{threshold:.3});
-  [$("#speed"),$("#dots"),$(".seesaw")].concat([].slice.call(document.querySelectorAll(".reveal"))).forEach(function(el){io.observe(el);});
+  [$("#dots")].forEach(function(el){io.observe(el);});
 
   // copy email
-  $("#copy").addEventListener("click",function(){var b=this;try{navigator.clipboard.writeText($("#email").textContent).then(function(){b.textContent="Copied ✓";setTimeout(function(){b.textContent="Copy email";},1600);});}catch(e){}});
+  $("#copy").addEventListener("click",function(){var b=this,em=$("#email");function sel(){var r=document.createRange();r.selectNodeContents(em);var g=getSelection();g.removeAllRanges();g.addRange(r);b.textContent="Selected, press copy";}
+    try{navigator.clipboard.writeText(em.textContent).then(function(){b.textContent="Copied ✓";setTimeout(function(){b.textContent="Copy email";},1600);},sel);}catch(e){sel();}});
 })();
 </script>
 </body>
