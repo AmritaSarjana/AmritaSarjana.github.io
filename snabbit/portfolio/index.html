@@ -233,13 +233,13 @@ h1 em{font-style:normal;color:var(--brand)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
 .coins{display:flex;flex-direction:column;gap:12px}
-.coin-row{display:grid;grid-template-columns:120px minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
+.coin-row{display:grid;grid-template-columns:110px minmax(0,1fr) 84px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
 .coin-row .stack{display:flex;flex-wrap:wrap;gap:3px;align-items:center;min-width:0}
-@media (max-width:520px){.coin-row{grid-template-columns:96px minmax(0,1fr) 56px}.coin{width:16px;height:16px}}
+@media (max-width:520px){.coin-row{grid-template-columns:86px minmax(0,1fr) 78px}.coin{width:16px;height:16px}}
 main{overflow-x:clip}
 .coin{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFE38A,var(--sun) 60%,#D99A00);box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);flex:none}
 .coin.part{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
-.pill{font-size:11.5px;font-weight:800;padding:4px 8px;border-radius:999px;text-align:center}
+.pill{font-size:11.5px;font-weight:800;padding:4px 8px;border-radius:999px;text-align:center;white-space:nowrap}
 .pill.g{background:var(--good-bg);color:var(--good)}.pill.k{background:var(--lav);color:var(--lav-ink)}.pill.r{background:#FDE4E5;color:var(--bad)}
 .seesaw{width:100%;height:auto;display:block}
 .seesaw text{font-family:var(--f)}
@@ -320,7 +320,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
         </div>
         <div class="h-more">
           <h4>One generalist who can do it all</h4>
-          <div class="row"><div><b>6</b>companies</div><div><b>2</b>products founded</div><div><b>₹60L</b>ARR at Daily Status</div></div>
+          <div class="row"><div><b>6</b>companies</div><div><b>2</b>products founded</div><div><b>₹12.6L</b>revenue at Daily Status</div></div>
         </div>
         <nav class="nav" aria-label="App">
           <button type="button" class="on"><i>⌂</i>Home</button>
@@ -390,7 +390,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
       <article class="card order">
         <div class="logo-b" style="background:#EA3982">DS</div>
         <div><p class="when">2026 – now · Founder</p><h3>Daily Status</h3><p>Built India's-languages content app with a team of one plus AI coding agents. Owned the full subscription journey: ads, onboarding, paywall, pricing, renewals, win-back.</p>
-          <div class="outcome"><span>100K+ downloads</span><span>₹60L ARR</span><span>Multiple regional languages</span></div></div>
+          <div class="outcome"><span>74K+ installs</span><span>2,200+ paying subscribers</span><span>₹12.6L revenue</span></div></div>
         <span class="done now">● In progress</span>
       </article>
       <article class="card order">
@@ -431,7 +431,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
     <div class="sec-head">
       <p class="eyebrow">Founder lessons</p>
       <h2>What running two companies taught me, in pictures.</h2>
-      <p class="lead">These are the numbers I lived with every morning. Truzell figures are illustrative; Daily Status figures are a 30-day snapshot.</p>
+      <p class="lead">These are the numbers I lived with every morning. Truzell figures are illustrative; Daily Status figures are from my cohort tracker, March to November 2026.</p>
     </div>
 
     <div class="two">
@@ -451,38 +451,29 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
       </article>
 
       <article class="card lesson">
-        <p class="eyebrow">Daily Status · paywall v3</p>
-        <h3>Out of every 100 people on a free trial, 8 more started paying.</h3>
-        <div class="dots" id="dots" aria-label="100 dots: trial users. Highlighted dots show the 8 extra paying users after paywall v3."></div>
-        <div class="legend"><span><i style="background:var(--brand)"></i>8 extra paying users after v3</span><span><i style="background:var(--line)"></i>The other 92 trial users</span></div>
-        <p class="small muted">Shipped on day 8; the jump held. Found with Mixpanel funnels, decided in a spreadsheet.</p>
-        <p class="ans">Lesson: <strong>one screen moved 8 people in every 100.</strong> Small tests, big levers.</p>
+        <p class="eyebrow">Daily Status · trial starts</p>
+        <h3>In one month, trial starts went from 6 to 18 in every 100 installs.</h3>
+        <div class="dots" id="dots" aria-label="100 dots for 100 installs. 6 grey dots started a trial in June; 12 pink dots are the extra trials in July."></div>
+        <div class="legend"><span><i style="background:#C9BFCF"></i>6 trials per 100 in June</span><span><i style="background:var(--brand)"></i>12 more by July</span></div>
+        <p class="small muted">June to July 2026. It then held at 13 to 15 in every 100 while monthly installs grew about 8×.</p>
+        <p class="ans">Lesson: <strong>fix the top of the funnel before you buy more of it.</strong></p>
       </article>
 
       <article class="card lesson">
-        <p class="eyebrow">Daily Status · ad campaigns</p>
-        <h3>For every ₹1 I spent, here's what came back.</h3>
+        <p class="eyebrow">Daily Status · return on ad spend</p>
+        <h3>For every ₹1 I spent, here's what came back, by month of sign-up.</h3>
         <div class="coins" id="coins"></div>
-        <p class="small muted">Each install cost ₹11.5, about the price of a cutting chai.</p>
-        <p class="ans">Lesson: <strong>speak the user's language, literally.</strong> Odia video got almost ₹2 back for every ₹1, so it scaled. Tamil static got 60 paise, so it was paused.</p>
+        <p class="small muted">An install cost ₹17.6 on average, about a cup of chai. It rose from ₹3.5 to ₹22.5 as monthly spend grew over 200×.</p>
+        <p class="ans">Lesson: <strong>scale changes the maths.</strong> Small early cohorts paid back up to 2.2×. At 200× the spend, a new cohort needs its renewals to turn a profit.</p>
       </article>
 
       <article class="card lesson">
-        <p class="eyebrow">Daily Status · the see-saw</p>
-        <h3>A paying user is worth 2.5× what it costs to find them.</h3>
-        <svg class="seesaw" viewBox="0 0 420 200" role="img" aria-label="See-saw: customer lifetime value of 1,050 rupees outweighs the 419 rupee cost to acquire a customer.">
-          <polygon points="210,190 186,150 234,150" fill="#C9BFCF"/>
-          <g id="plank" style="transform-origin:210px 148px;transform:rotate(-9deg)">
-            <rect x="30" y="142" width="360" height="12" rx="6" fill="#1C1424"/>
-            <rect x="52" y="74" width="104" height="68" rx="16" fill="#EA3982"/>
-            <text x="104" y="104" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">They pay</text>
-            <text x="104" y="126" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">₹1,050</text>
-            <rect x="282" y="98" width="88" height="44" rx="14" fill="#E6E0FF"/>
-            <text x="326" y="116" text-anchor="middle" fill="#5A44D4" font-size="11.5" font-weight="700">To find them</text>
-            <text x="326" y="134" text-anchor="middle" fill="#5A44D4" font-size="16" font-weight="800">₹419</text>
-          </g>
-        </svg>
-        <p class="ans">Lesson: <strong>LTV : CAC of 2.5×, paid back in about 4 months.</strong> The heavier side wins.</p>
+        <p class="eyebrow">Daily Status · the funnel</p>
+        <h3>Out of every 100 installs, 13 start a trial and 3 pay.</h3>
+        <div class="dots" id="dots2" aria-label="100 dots for 100 installs. 13 started a trial, and 3 of those became paying subscribers."></div>
+        <div class="legend"><span><i style="background:#C9BFCF"></i>10 tried, didn't pay</span><span><i style="background:var(--brand)"></i>3 paid</span><span><i style="background:var(--line)"></i>87 never started a trial</span></div>
+        <p class="small muted">74,512 installs, 9,914 trials, 2,201 paying subscribers. About 22% of trials pay.</p>
+        <p class="ans">Lesson: <strong>the business lives in those 3 dots.</strong> 6 of the 11 April subscribers were still paying after their fourth renewal.</p>
       </article>
     </div>
   </section>
@@ -539,7 +530,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
   // app mock
   function screen(n){$("#scr-home").hidden=n!=="home";$("#scr-book").hidden=n!=="book";$(".hint").innerHTML=n==="home"?"Tap <b>Instant</b> to book":"Pick an engagement, then <b>Continue</b>";}
   document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){screen(b.dataset.go);});});
-  var HAT=[["Product","2 products, 0 → 1"],["Growth","8 more paying in every 100"],["Tech","100K requests/sec, <50 ms"],["Ops","pickups, payments, disputes"]];
+  var HAT=[["Product","2 products, 0 → 1"],["Growth","trial starts 6 → 18 per 100 installs"],["Tech","100K requests/sec, <50 ms"],["Ops","pickups, payments, disputes"]];
   document.querySelectorAll(".hat").forEach(function(b){b.addEventListener("click",function(){var on=!b.classList.contains("on");
     document.querySelectorAll(".hat").forEach(function(x){x.classList.remove("on");});
     if(on){b.classList.add("on");$("#hat-line").textContent=HAT[+b.dataset.c][0]+": "+HAT[+b.dataset.c][1];}else $("#hat-line").textContent="Product · Growth · Tech · Ops";});});
@@ -550,8 +541,8 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
   var SVC={
     tech:{t:"Tech: build it, and make it scale",l:["Systems serving 2M+ users at 100K+ requests a second (Winuall)","Monolith to microservices on Kubernetes and Azure (IQVIA)","Shipped two apps alone on iOS and Android"],n:"8+ years of code"},
     product:{t:"Product: find the problem worth solving",l:["Took Truzell and Daily Status from zero to launch","Ran onboarding, paywall and pricing experiments","Decide with funnels and cohorts, not opinions"],n:"2 products, 0 → 1"},
-    growth:{t:"Growth: make the numbers move",l:["Paywall v3 lifted trial-to-paid by ~8 points","LTV : CAC of 2.5×, ~4-month payback","Referrals and SEO alongside paid"],n:"+8 in every 100"},
-    marketing:{t:"Marketing: spend where it comes back",l:["Meta Ads creative tests across regional languages","Scaled what returned, paused what didn't","Installs at ₹11.5 each"],n:"₹1 in, ₹1.9 back"},
+    growth:{t:"Growth: make the numbers move",l:["Trial starts went from 6 to 18 per 100 installs in a month","Scaled ad spend 200× while about 22% of trials kept paying","Referrals and SEO alongside paid"],n:"6 → 18 in every 100"},
+    marketing:{t:"Marketing: spend where it comes back",l:["Meta Ads creative tests across regional languages","₹13L of ad spend, tracked by cohort and ROAS","74K+ installs at ₹17.6 each on average"],n:"Early cohorts: 2.2× back"},
     ops:{t:"Ops: the unglamorous bits",l:["Inspections, pickups, deliveries and disputes at Truzell","Support tickets in the morning, board deck at night","Built the Tracxn credit ledger and MIS"],n:"Yes, I carried sofas"},
     team:{t:"Leading: align people, unblock teams",l:["Led 8 engineers at IQVIA","Sit between engineering, marketing and finance","Turn a debate into a decision"],n:"A cricket XI minus 3"}
   };
@@ -560,14 +551,16 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
   document.querySelectorAll(".svc button").forEach(function(b){b.addEventListener("click",function(){showSvc(b.dataset.s);});});
   showSvc("tech");
 
-  // 100 dots: 8 extra paying users
-  var d="";for(i=0;i<100;i++)d+='<i class="'+(i<8?"up":"")+'" style="transition-delay:'+(i*90)+'ms"></i>';$("#dots").innerHTML=d;
-  // coins: return per ₹1
-  var camp=[["Odia · Video",1.9,"Scale","g"],["Hindi · Reels",1.3,"Keep","k"],["Tamil · Static",0.6,"Paused","r"]];
-  $("#coins").innerHTML=camp.map(function(r){var h="",full=Math.floor(r[1]*10/2),frac=(r[1]*10/2)-full;
+  // 100 dots: trial starts per 100 installs, June (6) to July (18)
+  var d="";for(i=0;i<100;i++)d+='<i class="'+(i<6?"base":i<18?"up":"")+'" style="animation-delay:'+(i*60)+'ms"></i>';$("#dots").innerHTML=d;
+  // 100 dots: funnel, 13 trials of which 3 paid
+  d="";for(i=0;i<100;i++)d+='<i class="'+(i<3?"up":i<13?"base":"")+'"></i>';$("#dots2").innerHTML=d;
+  // coins: revenue per ₹1 of ad spend, by sign-up month (cohort tracker)
+  var camp=[["April",2.25,"Paid back","g"],["May",1.48,"Paid back","g"],["July",1.38,"Paid back","g"],["September",1.10,"Just above","k"],["October",0.77,"Maturing","r"]];
+  $("#coins").innerHTML=camp.map(function(r){var h="",full=Math.floor(r[1]*4),frac=(r[1]*4)-full;
     for(var i=0;i<full;i++)h+='<i class="coin"></i>';if(frac>0.01)h+='<i class="coin part" style="--p:'+Math.round(frac*100)+'%"></i>';
     return '<div class="coin-row"><span>'+r[0]+'<br><span class="muted" style="font-weight:600">₹'+r[1].toFixed(2)+' back</span></span><span class="stack" aria-label="'+r[1]+' rupees">'+h+'</span><span class="pill '+r[3]+'">'+r[2]+'</span></div>';}).join("")
-    +'<p class="small muted">Each coin = 20 paise.</p>';
+    +'<p class="small muted">Each coin = 25 paise. Revenue includes renewals so far; recent months are still collecting them.</p>';
 
   // animations on scroll
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;
