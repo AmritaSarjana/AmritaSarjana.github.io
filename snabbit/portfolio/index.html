@@ -193,7 +193,7 @@ h1 em{font-style:normal;color:var(--brand)}
 .lesson{display:flex;flex-direction:column;gap:14px}
 .lesson .q{display:flex;gap:10px;align-items:baseline}
 .lesson .q b{flex:none;font:800 12px/1 var(--f);padding:6px 9px;border-radius:999px;background:var(--brand);color:#fff;letter-spacing:.06em}
-.lesson .ans{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:15px}
+.lesson .ans{margin-top:auto;padding:14px 16px;border-radius:16px;background:var(--chip);font-size:15px;line-height:1.5}
 .lesson .ans strong{color:var(--brand-ink)}
 
 /* history */
@@ -223,7 +223,12 @@ h1 em{font-style:normal;color:var(--brand)}
 .slip .row.cost .meter i{background:#C9BFCF}
 .slip .row b{font-variant-numeric:tabular-nums}
 .slip .total{margin-top:6px;padding:14px;border-radius:16px;background:var(--chip);display:flex;align-items:center;gap:14px}
-.slip .total .big{font-size:30px;white-space:nowrap}
+.slip .total b.neg{color:var(--brand-ink);font-size:20px;letter-spacing:-.02em}
+.flow{list-style:none;margin:auto 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.flow li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:700}
+.flow li+li::before{content:"→";position:absolute;left:-12px;top:50%;transform:translateY(-50%);color:var(--brand);font-weight:800;font-size:13px}
+.flow .st-ic{color:var(--brand)}
+@media (max-width:420px){.flow{gap:10px}.flow li{font-size:11px;padding:10px 2px}.flow li+li::before{left:-10px}}
 .dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:4px}
 .dots i{aspect-ratio:1;border-radius:50%;background:var(--line)}
 .dots i.base{background:#C9BFCF}
@@ -233,9 +238,10 @@ h1 em{font-style:normal;color:var(--brand)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
 .coins{display:flex;flex-direction:column;gap:12px}
-.coin-row{display:grid;grid-template-columns:110px minmax(0,1fr) 84px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
+.coin-row{display:grid;grid-template-columns:44px 64px minmax(0,1fr) 62px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
+.coin-row .amt{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:12.5px;text-align:center;font-variant-numeric:tabular-nums}
 .coin-row .stack{display:flex;flex-wrap:wrap;gap:3px;align-items:center;min-width:0}
-@media (max-width:520px){.coin-row{grid-template-columns:86px minmax(0,1fr) 78px}.coin{width:16px;height:16px}}
+@media (max-width:520px){.coin-row{grid-template-columns:36px 58px minmax(0,1fr) 54px}.coin{width:16px;height:16px}}
 main{overflow-x:clip}
 .coin{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFE38A,var(--sun) 60%,#D99A00);box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);flex:none}
 .coin.part{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
@@ -431,49 +437,44 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
     <div class="sec-head">
       <p class="eyebrow">Founder lessons</p>
       <h2>What running two companies taught me, in pictures.</h2>
-      <p class="lead">These are the numbers I lived with every morning. Truzell figures are illustrative; Daily Status figures are from my cohort tracker, March to November 2026.</p>
+      <p class="lead">Real numbers, real trade-offs, and a few hard lessons from building Truzell and Daily Status.</p>
     </div>
 
     <div class="two">
       <article class="card lesson">
-        <p class="eyebrow">Truzell · one fridge order</p>
-        <h3>I earned ₹960. I kept the price of a samosa and chai.</h3>
+        <p class="eyebrow">Truzell · unit economics</p>
+        <h3>A ₹1,000 order looked good on top, but cost me money.</h3>
+        <p class="muted small" style="margin-top:-6px">Once I added operations, payments and support, each order ended up in the red.</p>
         <div class="slip">
-          <div class="row"><span>Commission on an ₹8,000 fridge</span><b>+₹960</b><div class="meter"><i style="width:100%"></i></div></div>
-          <div class="row cost"><span>Inspection</span><b>−₹180</b><div class="meter"><i style="width:18.75%"></i></div></div>
-          <div class="row cost"><span>Pickup and delivery</span><b>−₹350</b><div class="meter"><i style="width:36.5%"></i></div></div>
-          <div class="row cost"><span>Payment gateway</span><b>−₹60</b><div class="meter"><i style="width:6.25%"></i></div></div>
-          <div class="row cost"><span>Support and disputes</span><b>−₹70</b><div class="meter"><i style="width:7.3%"></i></div></div>
-          <div class="row cost"><span>Finding the customer</span><b>−₹250</b><div class="meter"><i style="width:26%"></i></div></div>
-          <div class="total"><span class="big" aria-hidden="true">🥟☕</span><div><b>₹50 left per order</b><p class="small muted">Trust doesn't scale like software. Every guarantee needed a person.</p></div></div>
+          <div class="row"><span>Sale price</span><b>+₹1,000</b><div class="meter"><i style="width:100%"></i></div></div>
+          <div class="row cost"><span>Commission (10%)</span><b>−₹100</b><div class="meter"><i style="width:10%"></i></div></div><div class="row cost"><span>Inspection</span><b>−₹40</b><div class="meter"><i style="width:4%"></i></div></div><div class="row cost"><span>Pickup &amp; delivery</span><b>−₹120</b><div class="meter"><i style="width:12%"></i></div></div><div class="row cost"><span>Payment gateway (2%)</span><b>−₹20</b><div class="meter"><i style="width:2%"></i></div></div><div class="row cost"><span>Support &amp; disputes</span><b>−₹40</b><div class="meter"><i style="width:4%"></i></div></div><div class="row cost"><span>Customer acquisition</span><b>−₹750</b><div class="meter"><i style="width:75%"></i></div></div>
+          <div class="total"><svg width="34" height="48" viewBox="0 0 34 48" aria-hidden="true"><rect x="2" y="1" width="30" height="46" rx="4" fill="#E9E4EA" stroke="#B9B0BD" stroke-width="1.5"/><path d="M2 17h30" stroke="#B9B0BD" stroke-width="1.5"/><path d="M8 7v6M8 22v10" stroke="#8F8494" stroke-width="2" stroke-linecap="round"/></svg><div><b class="neg">Net per order: −₹70</b><p class="small muted">Good demand, but the unit economics didn't work.</p></div></div>
         </div>
-        <p class="ans">Lesson: <strong>I went looking for a market where the product itself does the work.</strong> That became Daily Status.</p>
       </article>
 
       <article class="card lesson">
-        <p class="eyebrow">Daily Status · trial starts</p>
-        <h3>In one month, trial starts went from 6 to 18 in every 100 installs.</h3>
-        <div class="dots" id="dots" aria-label="100 dots for 100 installs. 6 grey dots started a trial in June; 12 pink dots are the extra trials in July."></div>
-        <div class="legend"><span><i style="background:#C9BFCF"></i>6 trials per 100 in June</span><span><i style="background:var(--brand)"></i>12 more by July</span></div>
-        <p class="small muted">June to July 2026. It then held at 13 to 15 in every 100 while monthly installs grew about 8×.</p>
-        <p class="ans">Lesson: <strong>fix the top of the funnel before you buy more of it.</strong></p>
+        <p class="eyebrow">Truzell · operations</p>
+        <h3>Every order created work beyond the product.</h3>
+        <p class="muted small" style="margin-top:-6px">The real challenge wasn't building the marketplace. It was running the operations behind it.</p>
+        <ol class="flow" aria-label="Every order went through five steps"><li><span class="st-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>Inspect</li><li><span class="st-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg></span>Pickup</li><li><span class="st-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg></span>Deliver</li><li><span class="st-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></span>Support</li><li><span class="st-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></svg></span>Resolve</li></ol>
+        <p class="ans"><strong>Lesson:</strong> The product wasn't the marketplace. The operation was.</p>
       </article>
 
       <article class="card lesson">
-        <p class="eyebrow">Daily Status · return on ad spend</p>
-        <h3>For every ₹1 I spent, here's what came back, by month of sign-up.</h3>
+        <p class="eyebrow">Daily Status · growth &amp; spend</p>
+        <h3>Growth can look healthy while economics are still fragile.</h3>
+        <p class="muted small" style="margin-top:-6px">Monthly ad spend, and what each ₹1 of it brought back.</p>
         <div class="coins" id="coins"></div>
-        <p class="small muted">An install cost ₹17.6 on average, about a cup of chai. It rose from ₹3.5 to ₹22.5 as monthly spend grew over 200×.</p>
-        <p class="ans">Lesson: <strong>scale changes the maths.</strong> Small early cohorts paid back up to 2.2×. At 200× the spend, a new cohort needs its renewals to turn a profit.</p>
+        <p class="ans"><strong>Lesson:</strong> Scale changes the maths. Early cohorts paid back ~2×, and new cohorts need renewals to turn a profit.</p>
       </article>
 
       <article class="card lesson">
         <p class="eyebrow">Daily Status · the funnel</p>
-        <h3>Out of every 100 installs, 13 start a trial and 3 pay.</h3>
-        <div class="dots" id="dots2" aria-label="100 dots for 100 installs. 13 started a trial, and 3 of those became paying subscribers."></div>
-        <div class="legend"><span><i style="background:#C9BFCF"></i>10 tried, didn't pay</span><span><i style="background:var(--brand)"></i>3 paid</span><span><i style="background:var(--line)"></i>87 never started a trial</span></div>
-        <p class="small muted">74,512 installs, 9,914 trials, 2,201 paying subscribers. About 22% of trials pay.</p>
-        <p class="ans">Lesson: <strong>the business lives in those 3 dots.</strong> 6 of the 11 April subscribers were still paying after their fourth renewal.</p>
+        <h3>Out of every 100 installs, ~13 took a trial.</h3>
+        <div class="dots" id="dots" aria-label="100 dots for 100 installs. 13 are highlighted for the installs that started a trial."></div>
+        <div class="legend"><span><i style="background:var(--brand)"></i>~13 took a trial</span><span><i style="background:var(--line)"></i>~87 didn't</span></div>
+        <p class="small muted">74,512 installs and 9,914 trials, March to November 2026.</p>
+        <p class="ans"><strong>Lesson:</strong> Get more people to start a trial, then focus on converting them to paid.</p>
       </article>
     </div>
   </section>
@@ -519,7 +520,7 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
 </main>
 
 <footer>
-  <div class="wrap">Amrita Sarjana's portfolio. Design inspired by Snabbit's look; not affiliated with or endorsed by Snabbit. Numbers are from my work; the Truzell order is illustrative.</div>
+  <div class="wrap">Amrita Sarjana's portfolio. Design inspired by Snabbit's look; not affiliated with or endorsed by Snabbit. Numbers are from my work.</div>
 </footer>
 
 <script>
@@ -551,16 +552,13 @@ footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:13px;c
   document.querySelectorAll(".svc button").forEach(function(b){b.addEventListener("click",function(){showSvc(b.dataset.s);});});
   showSvc("tech");
 
-  // 100 dots: trial starts per 100 installs, June (6) to July (18)
-  var d="";for(i=0;i<100;i++)d+='<i class="'+(i<6?"base":i<18?"up":"")+'" style="animation-delay:'+(i*60)+'ms"></i>';$("#dots").innerHTML=d;
-  // 100 dots: funnel, 13 trials of which 3 paid
-  d="";for(i=0;i<100;i++)d+='<i class="'+(i<3?"up":i<13?"base":"")+'"></i>';$("#dots2").innerHTML=d;
-  // coins: revenue per ₹1 of ad spend, by sign-up month (cohort tracker)
-  var camp=[["April",2.25,"Paid back","g"],["May",1.48,"Paid back","g"],["July",1.38,"Paid back","g"],["September",1.10,"Just above","k"],["October",0.77,"Maturing","r"]];
-  $("#coins").innerHTML=camp.map(function(r){var h="",full=Math.floor(r[1]*4),frac=(r[1]*4)-full;
-    for(var i=0;i<full;i++)h+='<i class="coin"></i>';if(frac>0.01)h+='<i class="coin part" style="--p:'+Math.round(frac*100)+'%"></i>';
-    return '<div class="coin-row"><span>'+r[0]+'<br><span class="muted" style="font-weight:600">₹'+r[1].toFixed(2)+' back</span></span><span class="stack" aria-label="'+r[1]+' rupees">'+h+'</span><span class="pill '+r[3]+'">'+r[2]+'</span></div>';}).join("")
-    +'<p class="small muted">Each coin = 25 paise. Revenue includes renewals so far; recent months are still collecting them.</p>';
+  // 100 dots: ~13 of every 100 installs started a trial (9,914 / 74,512)
+  var d="";for(i=0;i<100;i++)d+='<i class="'+(i<13?"up":"")+'" style="animation-delay:'+(i*60)+'ms"></i>';$("#dots").innerHTML=d;
+  // coins: monthly ad spend and revenue per ₹1 of it, by sign-up month (cohort tracker)
+  var camp=[["Apr","₹2.2K","2.2",9,"g"],["May","₹13K","1.5",6,"g"],["Jul","₹32K","1.4",5,"g"],["Sep","₹4.3L","1.1",4,"k"],["Oct","₹4.9L","0.8",3,"r"]];
+  $("#coins").innerHTML=camp.map(function(r){var h="",n=r[3];for(var i=0;i<n;i++)h+='<i class="coin"></i>';
+    return '<div class="coin-row"><span>'+r[0]+'</span><span class="amt">'+r[1]+'</span><span class="stack" aria-label="about ₹'+r[2]+' back per ₹1">'+h+'</span><span class="pill '+r[4]+'">~'+r[2]+'×</span></div>';}).join("")
+    +'<p class="small muted">Spend is per month. Each coin = 25 paise back per ₹1. Recent months are still collecting renewals.</p>';
 
   // animations on scroll
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;
