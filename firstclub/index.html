@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amrita Sarjana · One shipment, end to end</title>
+<meta name="description" content="One shipment followed from buying to the member’s door: my work, FirstClub’s supply chain, and an interactive promise engine.">
+<meta property="og:title" content="Amrita Sarjana · One shipment, end to end">
+<meta property="og:description" content="One shipment followed from buying to the member’s door: my work, FirstClub’s supply chain, and an interactive promise engine.">
+<meta property="og:image" content="https://amritasarjana.github.io/firstclub/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Amrita Sarjana: One shipment, end to end. A shipping-label styled page for a Senior PM, Supply Chain role.">
+<meta property="og:url" content="https://amritasarjana.github.io/firstclub/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Amrita Sarjana">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Amrita Sarjana · One shipment, end to end">
+<meta name="twitter:description" content="One shipment followed from buying to the member’s door: my work, FirstClub’s supply chain, and an interactive promise engine.">
+<meta name="twitter:image" content="https://amritasarjana.github.io/firstclub/og-image.png">
+<link rel="canonical" href="https://amritasarjana.github.io/firstclub/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Big+Shoulders+Stencil+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- engine component styles ---------- */
+
+  :root{
+    --kraft:#d8c29c; --kraft-dk:#b99c6b; --paper:#f7f1e4; --ink:#1f1b16; --muted:#6b5f4f;
+    --stamp:#c0392b; --ok:#3f6b2a; --warn:#b7791f; --line:#cdb88f;
+    --hard:#5d7d2f; --firm:#6e7f2d; --ready:#7a6a24; --ripe:#4a3520;
+    --mono:'IBM Plex Mono',ui-monospace,monospace; --stencil:'Big Shoulders Stencil Display',Impact,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--kraft);color:var(--ink);font:15px/1.5 Archivo,system-ui,sans-serif;
+    background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.025) 0 2px,transparent 2px 7px);}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 60px}
+  header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+  .eyebrow{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h1{font:800 clamp(34px,6vw,58px)/.95 var(--stencil);letter-spacing:.02em;margin:6px 0 8px;text-transform:uppercase}
+  .sub{max-width:640px;margin:0;color:#3b3329}
+  .stamp{font:800 15px var(--stencil);letter-spacing:.14em;color:var(--stamp);border:3px solid var(--stamp);
+    padding:6px 12px;transform:rotate(-4deg);text-transform:uppercase;opacity:.85;white-space:nowrap}
+  .tape{height:14px;background:rgba(240,226,190,.75);margin:0 0 18px;border-top:1px dashed var(--kraft-dk);border-bottom:1px dashed var(--kraft-dk)}
+
+  .panel{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 rgba(31,27,22,.85);padding:18px}
+  .panel h2{font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;display:flex;justify-content:space-between;gap:8px}
+  .panel h2 small{font-weight:400;color:var(--muted);letter-spacing:.04em;text-transform:none}
+
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 22px;margin-bottom:22px}
+  .ctl label,.ctl .lbl{display:block;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .seg{display:flex;flex-wrap:wrap;border:2px solid var(--ink)}
+  .seg button{flex:1;font:500 13px var(--mono);padding:8px 8px;border:0;border-right:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;min-width:0}
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .seg button:focus-visible,.btn:focus-visible,input:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+  .stepper{display:flex;align-items:center;border:2px solid var(--ink);width:max-content}
+  .stepper button{font:600 18px var(--mono);width:40px;height:38px;border:0;background:transparent;cursor:pointer}
+  .stepper output{font:600 16px var(--mono);min-width:46px;text-align:center;border-left:2px solid var(--ink);border-right:2px solid var(--ink);line-height:38px}
+  .acc-row{display:flex;align-items:center;gap:12px}
+  input[type=range]{flex:1;accent-color:var(--ink)}
+  .acc-val{font:600 20px var(--mono);min-width:56px;text-align:right}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+  .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:22px}
+  .stack{display:grid;gap:22px;align-content:start}
+
+  table{width:100%;border-collapse:collapse;font:13px var(--mono)}
+  th{font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+  td{padding:8px 6px;border-bottom:1px dashed var(--line);vertical-align:top}
+  td.num,th.num{text-align:right}
+  tr.excluded td{color:#9a8c78}
+  tr.alloc td{background:rgba(63,107,42,.10)}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;border:1px solid rgba(0,0,0,.3)}
+  .tag{display:inline-block;font-size:11.5px;padding:1px 6px;border:1.5px solid currentColor;white-space:nowrap}
+  .tag.ok{color:var(--ok)} .tag.no{color:#8a7b66} .tag.el{color:var(--ink)}
+  .haircut{color:var(--stamp);font-size:11px}
+  .tbl-wrap{overflow-x:auto}
+
+  .cap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media (max-width:520px){.cap{grid-template-columns:repeat(2,1fr)}}
+  .cap div{border:1.5px solid var(--ink);padding:8px 10px;background:#fbf7ee}
+  .cap b{display:block;font:600 22px var(--mono)}
+  .cap span{font:11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .cap .bad b{color:var(--stamp)}
+
+  .decision{border:3px solid var(--ink);padding:16px;background:#fff;position:relative}
+  .decision .kicker{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .decision .big{font:800 clamp(40px,7vw,60px)/1 var(--stencil);margin:6px 0 4px;text-transform:uppercase}
+  .decision.hold .big,.decision.none .big{color:var(--stamp);font-size:clamp(30px,5vw,42px)}
+  .decision.partial .big{color:var(--warn)}
+  .facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font:13px var(--mono);margin-top:12px}
+  .facts dt{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.08em;padding-top:2px}
+  .facts dd{margin:0}
+  .conf{display:flex;align-items:center;gap:10px;margin-top:4px}
+  .meter{flex:1;height:10px;border:1.5px solid var(--ink);background:#efe6d3;max-width:200px}
+  .meter i{display:block;height:100%}
+
+  .bar{display:flex;height:26px;border:2px solid var(--ink);margin:14px 0 6px;font:600 11px var(--mono)}
+  .bar span{display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap;border-right:1.5px solid var(--ink);color:#fff}
+  .bar span:last-child{border-right:0}
+  .legend{display:flex;flex-wrap:wrap;gap:4px 12px;font:11.5px var(--mono);color:var(--muted)}
+  .legend i{display:inline-block;width:10px;height:10px;margin-right:4px;vertical-align:-1px;border:1px solid var(--ink)}
+
+  ol.trace{margin:0;padding:0;list-style:none;counter-reset:s;font-size:14px}
+  ol.trace li{counter-increment:s;padding:8px 0 8px 36px;position:relative;border-bottom:1px dashed var(--line)}
+  ol.trace li:last-child{border-bottom:0}
+  ol.trace li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:8px;font:600 12px var(--mono);border:1.5px solid var(--ink);padding:0 4px}
+  ol.trace b{font-weight:600}
+
+  .btn{font:700 15px var(--stencil);letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;padding:12px 18px;cursor:pointer;box-shadow:4px 4px 0 var(--stamp)}
+  .btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--stamp)}
+  .reality{margin-top:14px;display:none}
+  .reality.show{display:block}
+  .shelf{font:13px var(--mono);margin:0 0 12px;padding:0;list-style:none}
+  .shelf li{padding:3px 0}
+  .shelf s{color:var(--stamp)}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:520px){.vs{grid-template-columns:1fr}}
+  .vs > div{border:2px solid var(--ink);padding:12px;background:#fff}
+  .vs h3{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;margin:0 0 6px;color:var(--muted)}
+  .vs .res{font:800 22px var(--stencil);letter-spacing:.04em;text-transform:uppercase}
+  .vs .good{color:var(--ok)} .vs .badr{color:var(--stamp)} .vs .neutral{color:var(--warn)}
+  .vs p{margin:6px 0 0;font-size:13px}
+
+  footer{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end}
+  @media (max-width:700px){footer{grid-template-columns:1fr}}
+  .note{font-size:14px;max-width:700px}
+  .note b{font-weight:600}
+  .quip{font:italic 15px Archivo,system-ui,sans-serif;border-left:4px solid var(--stamp);padding-left:12px;max-width:420px}
+  .fine{font:11.5px var(--mono);color:var(--muted);margin-top:10px}
+  .panel{min-width:0}
+  html,body{overflow-x:hidden}
+  @media (max-width:860px){.grid{display:flex;flex-direction:column}.stack{display:contents}.p-promise{order:-1}.p-reality{order:5}}
+
+/* ---------- page styles ---------- */
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+.wrap{padding-top:0}
+a{color:inherit}
+.mono{font-family:var(--mono)}
+
+/* tracker */
+.tracker{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--paper);border-bottom:3px solid var(--stamp)}
+.tracker ol{list-style:none;margin:0 auto;padding:0 12px;max-width:1120px;display:flex;overflow-x:auto;scrollbar-width:none}
+.tracker ol::-webkit-scrollbar{display:none}
+.tracker li{flex:1 0 auto}
+.tracker a{display:flex;align-items:center;gap:6px;padding:12px 10px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#a99c86;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-3px}
+.tracker a .n{font-weight:600}
+.tracker a.done{color:#e9dfcb}
+.tracker a.done .n::after{content:" ✓";color:#9fbf7a}
+.tracker a.on{color:#fff;border-bottom-color:#fff}
+.tracker a:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+
+section.chap{padding:64px 0 8px}
+.sec-head{margin-bottom:24px;max-width:760px}
+.node{display:inline-block;font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:4px 8px}
+.sec-head h2{font:800 clamp(30px,5vw,48px)/1 var(--stencil);text-transform:uppercase;letter-spacing:.02em;margin:12px 0 8px}
+.sec-head .lede{font-size:17px;margin:0;color:#3b3329}
+.asks{font:12px var(--mono);color:var(--muted);margin-top:10px}
+.asks b{color:var(--ink);font-weight:600}
+.quip{margin-top:22px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center;padding:56px 0 30px}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:28px}}
+.hero h1{font:800 clamp(48px,9vw,96px)/.9 var(--stencil);margin:10px 0 12px;text-transform:uppercase}
+.path{font:600 14px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.path span{color:var(--stamp)}
+.pos{font:600 clamp(20px,2.6vw,26px)/1.3 Archivo,system-ui,sans-serif;margin:18px 0 26px;max-width:560px}
+.big3{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--ink);background:var(--paper);box-shadow:5px 5px 0 rgba(31,27,22,.85)}
+@media (max-width:520px){.big3{grid-template-columns:1fr}}
+.big3 div{padding:14px 16px;border-right:2px solid var(--ink)}
+.big3 div:last-child{border-right:0}
+@media (max-width:520px){.big3 div{border-right:0;border-bottom:2px solid var(--ink)}.big3 div:last-child{border-bottom:0}}
+.big3 b{display:block;font:800 clamp(34px,4.5vw,46px)/1 var(--stencil)}
+.big3 span{font:12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.strip{font:500 13px var(--mono);margin-top:14px;color:#3b3329}
+.po{background:var(--paper);border:2px solid var(--ink);font:13px var(--mono);position:relative;box-shadow:5px 5px 0 rgba(31,27,22,.85)}
+.po .po-h{background:var(--ink);color:var(--paper);padding:10px 14px;font-weight:600;letter-spacing:.1em}
+.po dl{margin:0;display:grid;grid-template-columns:auto 1fr}
+.po dt,.po dd{margin:0;padding:9px 14px;border-bottom:1px dashed var(--line)}
+.po dt{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding-top:11px}
+.po dd{font-weight:500}
+.po .ready{color:var(--ok);font-weight:600}
+.po .stamp{position:absolute;right:-8px;bottom:-18px;background:var(--paper)}
+
+/* QC */
+.qc-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:22px}
+@media (max-width:860px){.qc-grid{grid-template-columns:1fr}}
+.qc-list{list-style:none;margin:0;padding:0;font:14px var(--mono)}
+.qc-list li{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line)}
+.qc-list .y{color:var(--ok);font-weight:600}
+.qc-list .w{color:var(--warn);font-weight:600}
+.qc-list li.gap{color:#5a4d3a}
+.proof{display:grid;gap:14px}
+.proof div{border-left:4px solid var(--ink);padding:2px 0 2px 12px}
+.proof b{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;display:block}
+
+/* Truzell */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:4px 0 26px;font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.flow span{border:2px solid var(--ink);padding:7px 10px;background:var(--paper)}
+.flow span.me{background:var(--ink);color:var(--paper)}
+.flow i{font-style:normal;color:var(--muted)}
+.tz-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+@media (max-width:860px){.tz-grid{grid-template-columns:1fr}}
+.roles{list-style:none;margin:0;padding:0}
+.roles li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.roles b{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+.tz-nums{display:flex;gap:26px;margin-top:18px;flex-wrap:wrap}
+.tz-nums b{display:block;font:800 40px/1 var(--stencil)}
+.tz-nums span{font:12px var(--mono);color:var(--muted);text-transform:uppercase}
+.slip{background:#fff;border:2px dashed var(--ink);padding:16px 18px;font:13.5px var(--mono)}
+.slip h3{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px;display:flex;justify-content:space-between}
+.slip h3 small{color:var(--muted);font-weight:400}
+.slip .row{display:flex;justify-content:space-between;padding:4px 0}
+.slip .neg{color:var(--stamp)}
+.slip .sub{border-top:1px solid var(--ink);margin-top:4px;padding-top:6px;font-weight:600}
+.slip .left{border-top:3px double var(--ink);margin-top:6px;padding-top:8px;font:800 26px var(--stencil);display:flex;justify-content:space-between}
+.slip .fine{margin-top:10px}
+.lesson{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+@media (max-width:860px){.lesson{grid-template-columns:1fr}}
+.lesson p{margin:0;font-size:16px}
+.thesis{font:800 clamp(24px,3.2vw,32px)/1.1 var(--stencil);text-transform:uppercase;border:3px solid var(--ink);padding:16px;background:var(--paper)}
+
+/* bins */
+.bins{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:860px){.bins{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.bins{grid-template-columns:1fr}}
+.bin{background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 rgba(31,27,22,.85);display:flex;flex-direction:column}
+.bin .tag-b{background:#f0c94a;border-bottom:2px solid var(--ink);padding:6px 10px;font:600 12px var(--mono);letter-spacing:.1em;display:flex;justify-content:space-between}
+.bin .body{padding:12px 12px 14px}
+.bin h3{margin:0 0 2px;font:800 24px var(--stencil);text-transform:uppercase}
+.bin .what{font-size:13px;color:var(--muted);margin:0 0 10px}
+.bin .m b{font:800 28px/1 var(--stencil);display:block}
+.bin .m span{font:11.5px var(--mono);color:var(--muted)}
+.bin .m+.m{margin-top:8px}
+.bin.big{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.4fr}
+@media (max-width:860px){.bin.big{grid-template-columns:1fr}}
+.bin.big .tag-b{grid-column:1/-1;background:var(--ink);color:var(--paper)}
+.bin.big h3{font-size:34px}
+.bin.big .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.bin.big .nums b{font-size:32px}
+.loop{padding:12px 14px;border-left:2px dashed var(--ink)}
+@media (max-width:860px){.loop{border-left:0;border-top:2px dashed var(--ink)}}
+.loop h4{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px;color:var(--muted)}
+.loop ol{list-style:none;margin:0;padding:0;counter-reset:l}
+.loop li{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.loop li:last-child{border-bottom:0}
+.loop li b{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.loop li b::before{content:"↓ ";color:var(--muted)}
+.loop li:first-child b::before{content:"→ "}
+.loop li span{color:#3b3329}
+@media (max-width:520px){.loop li{grid-template-columns:1fr;gap:0}}
+
+/* transfer */
+.xfer{width:100%;border-collapse:collapse;background:var(--paper);border:2px solid var(--ink);font:14px Archivo,system-ui,sans-serif}
+.xfer th{background:var(--ink);color:var(--paper);font:600 11px var(--mono);letter-spacing:.1em;padding:10px 12px;border:0}
+.xfer td{padding:12px;border-bottom:1px dashed var(--line);vertical-align:top}
+.xfer td:first-child{font:600 13px var(--mono);white-space:nowrap}
+.xfer td:last-child{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.04em}
+.xfer a{color:var(--stamp)}
+@media (max-width:640px){.xfer thead{display:none}.xfer tr{display:block;border-bottom:2px solid var(--ink);padding:6px 0}.xfer td{display:block;border:0;padding:4px 12px}.xfer td:last-child::before{content:"Applies to → ";color:var(--muted);text-transform:none}}
+
+/* field notes */
+.notebook{background:#fffdf6;border:2px solid var(--ink);box-shadow:5px 5px 0 rgba(31,27,22,.85);padding:18px 20px;
+  background-image:repeating-linear-gradient(transparent 0 27px,#e3d9c3 27px 28px)}
+.notebook h3{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:0 0 4px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.notebook .status{color:var(--warn)}
+.nb-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:12px}
+@media (max-width:860px){.nb-grid{grid-template-columns:1fr}}
+.nb-grid h4{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;margin:0 0 6px;color:var(--muted)}
+.nb-grid ul{margin:0;padding-left:18px}
+.hyp{border:2px solid var(--ink);padding:12px;background:var(--paper);font-size:15px}
+.empty-row td{color:#b3a68f}
+
+.check{width:100%;border-collapse:collapse;font:14px Archivo,system-ui,sans-serif;margin-top:10px;background:rgba(255,253,246,.85)}
+.check th{text-align:left;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--ink)}
+.check td{padding:10px;border-bottom:1px dashed var(--line);vertical-align:top}
+.check td:first-child{font:600 13px var(--mono)}
+.check td:last-child{font:500 13px var(--mono);color:var(--stamp)}
+@media (max-width:640px){.check thead{display:none}.check tr{display:block;border-bottom:2px solid var(--ink);padding:6px 0}.check td{display:block;border:0;padding:3px 0}.check td:last-child::before{content:"Signal → ";color:var(--muted)}}
+.hyp-block{margin-top:22px}
+.hyp-block h4{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px;color:var(--muted)}
+.hyp-block .hyp{margin:0 0 16px;font:600 clamp(17px,2.2vw,21px)/1.35 Archivo,system-ui,sans-serif}
+.chain-flow{margin:0 0 16px}
+.next{margin:0;font-size:15px;border-top:2px dashed var(--ink);padding-top:12px}
+.next b{font-weight:700}
+.promise-rules{margin:12px 0 10px;padding-left:20px;font-size:16px}
+.promise-rules li{margin:3px 0}
+.why{font-size:13.5px;font-style:italic;border-top:1px dashed var(--line);padding-top:8px;margin-top:10px !important}
+.formula{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.04em;border:1.5px solid var(--ink);padding:6px 8px;margin:10px 0 0 !important;background:#fff}
+.cascade{margin:0;padding:0;list-style:none;font:13px var(--mono)}
+.cascade li{padding:2px 0}
+.cascade li+li::before{content:"→ ";color:var(--stamp)}
+.dash-vs{display:flex;flex-wrap:wrap;gap:6px 16px;font:13px var(--mono);margin:12px 0 8px}
+.dash-vs b{font-size:16px}
+.route{font-size:13px;margin:6px 0 22px}
+.route span{padding:10px 14px}
+.manifest{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--ink);background:var(--paper);box-shadow:5px 5px 0 rgba(31,27,22,.85)}
+@media (max-width:700px){.manifest{grid-template-columns:1fr}}
+.manifest div{padding:14px 16px;border-right:2px dashed var(--ink)}
+.manifest div:last-child{border-right:0}
+@media (max-width:700px){.manifest div{border-right:0;border-bottom:2px dashed var(--ink)}.manifest div:last-child{border-bottom:0}}
+.manifest b{display:block;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.manifest span{font:800 22px/1.15 var(--stencil);text-transform:uppercase}
+.bins.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:860px){.bins.three{grid-template-columns:1fr}}
+a.bin{text-decoration:none;color:inherit;transition:transform .12s}
+a.bin:hover{transform:translate(-2px,-2px)}
+a.bin:focus-visible{outline:3px solid var(--stamp);outline-offset:3px}
+.also{font-size:14px;margin:18px 0 0;max-width:900px}
+.also a{color:var(--stamp)}
+.iq{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:start}
+@media (max-width:860px){.iq{grid-template-columns:1fr}}
+.iq-copy{font-size:16px;margin:0 0 4px}
+.iq .thesis{font-size:clamp(20px,2.4vw,26px)}
+.inputs{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media (max-width:960px){.inputs{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.inputs{grid-template-columns:repeat(2,1fr)}}
+.inputs div{background:var(--paper);border:2px solid var(--ink);padding:12px}
+.inputs b{display:block;font:800 18px/1.1 var(--stencil);text-transform:uppercase;margin-bottom:4px}
+.inputs span{font-size:13px;color:#3b3329}
+.principle{font:800 clamp(24px,3.4vw,36px)/1.1 var(--stencil);text-transform:uppercase;margin:26px 0;padding:18px;border:3px solid var(--ink);background:var(--paper);box-shadow:5px 5px 0 var(--stamp)}
+.principle.small{font-size:clamp(18px,2.4vw,24px);margin-top:22px;box-shadow:5px 5px 0 rgba(31,27,22,.85)}
+.eta.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:960px){.eta.four{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.eta.four{grid-template-columns:1fr}}
+@media (max-width:520px){.next-stop{white-space:normal !important}}
+.next-stop{display:inline-block;white-space:nowrap;max-width:100%;color:var(--stamp);border:1.5px dashed var(--stamp);padding:1px 6px}
+.gap-why{display:grid;grid-template-columns:1fr 1.6fr;gap:16px;margin-top:22px}
+@media (max-width:760px){.gap-why{grid-template-columns:1fr}}
+.gap-why>div{border:2px solid var(--ink);padding:16px;background:var(--paper)}
+.gap-why .gap{border-style:dashed}
+.gap-why .d{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.gap-why p{margin:6px 0 0;font-size:17px}
+.gap-why .apply{background:var(--ink);color:var(--paper)}
+.gap-why .apply .d{color:#bfb39c}
+.node.ex{background:transparent;color:var(--stamp);border:1.5px solid var(--stamp);margin-left:6px}
+.route-map td:last-child{font:14px Archivo,system-ui,sans-serif;text-transform:none;letter-spacing:0}
+.route-map td:nth-child(2){font-weight:600}
+@media (max-width:640px){.route-map td:last-child::before{content:"I'd build → ";color:var(--muted);font-family:var(--mono);font-size:12px}}
+.p4{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--ink);margin:10px 0 4px}
+@media (max-width:420px){.p4{grid-template-columns:repeat(2,1fr)}}
+.p4>div{padding:8px 10px;border-right:1.5px solid var(--ink)}
+.p4>div:last-child{border-right:0}
+@media (max-width:420px){.p4>div:nth-child(2){border-right:0}.p4>div:nth-child(-n+2){border-bottom:1.5px solid var(--ink)}}
+.p4 span{display:block;font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.p4 b{display:block;font:800 24px/1.1 var(--stencil);white-space:nowrap}
+.p4 b small{font-size:14px}
+.p4 i{display:block;font:normal 10.5px/1.3 var(--mono);color:var(--muted)}
+.p4 .eta-t{background:var(--ink);color:var(--paper)}
+.p4 .eta-t span,.p4 .eta-t i{color:#bfb39c}
+.cols2{columns:2}
+/* engine section tweaks */
+#engine .controls{margin-top:0}
+#engine .note{font-size:14px}
+.eng-foot{margin-top:22px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end}
+@media (max-width:700px){.eng-foot{grid-template-columns:1fr}}
+
+/* plan */
+.eta{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:860px){.eta{grid-template-columns:1fr}}
+.eta div{background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 rgba(31,27,22,.85);padding:16px}
+.eta .d{font:600 12px var(--mono);letter-spacing:.12em;color:var(--muted)}
+.eta h3{font:800 28px/1 var(--stencil);text-transform:uppercase;margin:6px 0 10px}
+.eta p{margin:0 0 8px;font-size:14.5px}
+.eta ul{margin:0;padding-left:18px;font:13px var(--mono)}
+.chain{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
+
+/* delivered */
+.delivered{margin:70px auto 0;max-width:620px;background:var(--paper);border:3px solid var(--ink);box-shadow:8px 8px 0 rgba(31,27,22,.85);position:relative}
+.delivered .flap{background:var(--kraft-dk);border-bottom:3px solid var(--ink);padding:10px 16px;font:600 12px var(--mono);letter-spacing:.14em;display:flex;justify-content:space-between}
+.delivered .inner{padding:20px 22px 24px}
+.delivered ul{list-style:none;margin:0 0 14px;padding:0;font:14px var(--mono);columns:2}
+@media (max-width:520px){.delivered ul{columns:1}}
+.delivered li{padding:3px 0}
+.delivered li::before{content:"✓ ";color:var(--ok);font-weight:600}
+.delivered .st{font:800 34px var(--stencil);letter-spacing:.06em;color:var(--ok);border-top:2px dashed var(--ink);padding-top:10px}
+.delivered .close{font-size:18px;margin:14px 0 18px}
+.delivered .close b{display:block;font-weight:800}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn.alt{background:var(--paper);color:var(--ink);border:2px solid var(--ink)}
+a.btn{text-decoration:none;display:inline-block}
+.contact{font:13px var(--mono);margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.contact button{font:600 12px var(--mono);border:1.5px solid var(--ink);background:transparent;padding:4px 8px;cursor:pointer}
+.pagefoot{font:11.5px var(--mono);color:var(--muted);text-align:center;margin-top:40px}
+</style>
+</head>
+<body>
+
+<nav class="tracker" aria-label="Shipment tracker">
+  <ol id="track">
+    <li><a href="#cover" data-i="0"><span class="n">01</span> Source</a></li>
+    <li><a href="#built" data-i="1"><span class="n">02</span> QC</a></li>
+    <li><a href="#truzell" data-i="2"><span class="n">03</span> First mile</a></li>
+    <li><a href="#daily-status" data-i="3"><span class="n">04</span> DC</a></li>
+    <li><a href="#route" data-i="4"><span class="n">05</span> Middle mile</a></li>
+    <li><a href="#engine" data-i="5"><span class="n">06</span> Club House</a></li>
+    <li><a href="#inventory" data-i="6"><span class="n">07</span> Inventory</a></li>
+    <li><a href="#capacity" data-i="7"><span class="n">08</span> Capacity</a></li>
+    <li><a href="#promise" data-i="8"><span class="n">09</span> Member promise</a></li>
+    <li><a href="#floor" data-i="9"><span class="n">10</span> Delivery</a></li>
+    <li><a href="#plan" data-i="10"><span class="n">11</span> Learning</a></li>
+  </ol>
+</nav>
+
+<main class="wrap">
+
+<!-- 01 COVER -->
+<section id="cover" class="hero" data-stage="0">
+  <div>
+    <div class="path">Product builder <span>·</span> Engineer <span>·</span> Founder</div>
+    <h1>Amrita Sarjana</h1>
+    <p class="pos">I build products where the screen is only the beginning.</p>
+    <div class="big3">
+      <div><b>~₹70L</b><span>ARR · Daily Status</span></div>
+      <div><b>20K+</b><span>Transactions · Daily Status</span></div>
+      <div><b>100K+</b><span>Installs · Daily Status</span></div>
+    </div>
+  </div>
+  <div class="po" aria-label="Purchase order">
+    <div class="po-h">PURCHASE ORDER #FC-SPM-001</div>
+    <dl>
+      <dt>Item</dt><dd>Amrita Sarjana</dd>
+      <dt>Category</dt><dd>Product builder / Engineer / Founder</dd>
+      <dt>Quantity</dt><dd>01</dd>
+      <dt>Origin</dt><dd>Bengaluru</dd>
+      <dt>Destination</dt><dd>FirstClub · Senior PM, Supply Chain</dd>
+      <dt>Status</dt><dd class="ready">Ready to ship</dd>
+    </dl>
+    <div class="stamp">Handle with care</div>
+  </div>
+</section>
+
+<!-- 02 THE SHIPMENT -->
+<section id="shipment" class="chap" data-stage="0">
+  <div class="sec-head">
+    <span class="node">02 · The shipment</span>
+    <h2>One shipment. End to end.</h2>
+    <p class="lede"><b>I don't just build product screens.</b> I understand how the physical operation behind the product works, and I turn messy operational problems into measurable product systems.</p>
+    <p class="lede" style="margin-top:10px">The member sees a promise on a screen. Behind it is buying, collection, storage, movement, a Club House shelf and a rider. This page follows one shipment through that system, through my work first, then into FirstClub's problem.</p>
+  </div>
+  <div class="flow route" aria-label="Route">
+    <span>Buying</span><i>→</i><span>Collection</span><i>→</i><span>DC</span><i>→</i><span>Middle mile</span><i>→</i><span>Club House</span><i>→</i><span class="me">Member</span>
+  </div>
+  <div class="manifest">
+    <div><b>The shipment</b><span>My experience</span></div>
+    <div><b>The route</b><span>FirstClub's supply chain</span></div>
+    <div><b>The destination</b><span>The kind of PM I can become there</span></div>
+  </div>
+</section>
+
+<!-- 03 WHERE I'VE ACTUALLY BUILT -->
+<section id="built" class="chap" data-stage="1">
+  <div class="sec-head">
+    <span class="node">03 · Intake</span>
+    <h2>Where I've actually built</h2>
+    <p class="lede">Before anything enters the system, it gets inspected. Three crates of evidence, each opened below.</p>
+  </div>
+  <div class="bins three">
+    <a class="bin" href="#truzell">
+      <div class="tag-b"><span>CRATE 01</span><span>2025</span></div>
+      <div class="body"><h3>Truzell</h3><p class="what">Marketplace + operational complexity</p>
+        <div class="m"><b>10K+</b><span>downloads</span></div><div class="m"><b>20+</b><span>orders delivered</span></div></div>
+    </a>
+    <a class="bin" href="#daily-status">
+      <div class="tag-b"><span>CRATE 02</span><span>2026 → now</span></div>
+      <div class="body"><h3>Daily Status</h3><p class="what">Product + business ownership</p>
+        <div class="m"><b>~₹70L</b><span>ARR</span></div><div class="m"><b>20K+</b><span>transactions</span></div></div>
+    </a>
+    <a class="bin" href="#iqvia">
+      <div class="tag-b"><span>CRATE 03</span><span>2022–26</span></div>
+      <div class="body"><h3>IQVIA</h3><p class="what">Complex technical systems</p>
+        <div class="m"><b>8</b><span>engineers led</span></div><div class="m"><b>1M+</b><span>people on the platform</span></div></div>
+    </a>
+  </div>
+  <p class="also"><b>Also on the truck:</b> Tracxn (export MIS and credit ledger, −40% invoice discrepancies) · Yellow.ai (conversational AI, 90% faster responses) · Winuall (2M+ users, 100K+ requests/sec) · <a href="https://amritasarjana.github.io/snabbit/casestudy/">Snabbit case study ↗</a></p>
+</section>
+
+<!-- 04 TRUZELL -->
+<section id="truzell" class="chap" data-stage="2">
+  <div class="sec-head">
+    <span class="node">04 · Truzell</span>
+    <h2>The marketplace wasn't the product. The operations were.</h2>
+    <p class="lede">A peer-to-peer marketplace for people who need to sell household things fast, usually because they're moving. Buyers don't trust used goods, so we handled everything between the seller's door and the buyer's.</p>
+  </div>
+
+  <div class="flow" aria-label="Truzell order flow">
+    <span>Seller</span><i>→</i><span class="me">Listing</span><i>→</i><span class="me">QC</span><i>→</i><span class="me">Pickup</span><i>→</i><span>Buyer</span><i>→</i><span class="me">Delivery</span><i>→</i><span class="me">Dispute</span>
+  </div>
+
+  <div class="tz-grid">
+    <div class="panel">
+      <h2>Every dark box was me <small>no ops team</small></h2>
+      <ul class="roles">
+        <li><b>Listing</b><span>Turned a rushed "selling before I move" listing into something a stranger would trust.</span></li>
+        <li><b>QC</b><span>Inspected and graded every item before it went live, because a buyer won't trust a photo.</span></li>
+        <li><b>Pickup</b><span>Coordinated windows with sellers who were, by definition, in the middle of moving.</span></li>
+        <li><b>Delivery</b><span>Got bulky items to the buyer intact. Yes, I carried the sofas.</span></li>
+        <li><b>Dispute</b><span>Settled it when "like new" meant different things to seller and buyer.</span></li>
+      </ul>
+      <div class="tz-nums">
+        <div><b>10K+</b><span>Downloads</span></div>
+        <div><b>20+</b><span>Orders delivered</span></div>
+        <div><b style="font-size:24px;padding-top:12px">iOS + Android</b><span>Shipped on both</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="slip" aria-label="Delivery slip">
+        <h3>Delivery slip · ₹8,000 fridge <small>illustrative</small></h3>
+        <div class="row"><span>Commission on ₹8,000</span><span>+₹960</span></div>
+        <div class="row"><span>Inspection</span><span class="neg">−₹180</span></div>
+        <div class="row"><span>Pickup and delivery</span><span class="neg">−₹350</span></div>
+        <div class="row"><span>Payment gateway</span><span class="neg">−₹60</span></div>
+        <div class="row"><span>Support and disputes</span><span class="neg">−₹70</span></div>
+        <div class="row sub"><span>Contribution</span><span>₹300</span></div>
+        <div class="row"><span>Acquisition cost per order</span><span class="neg">−₹250</span></div>
+        <div class="left"><span>Left per order</span><span>₹50</span></div>
+        <div class="fine">Figures are illustrative of the order economics.</div>
+      </div>
+      <p class="quip">“I learned cost per order the expensive way.”</p>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <p>Building the app was the easy part. The hard part was everything after the "Buy" button. Every pickup window, inspection and dispute showed up on that slip. Whether the product worked was decided by the operations, not the screens.</p>
+    <div class="thesis">The product wasn't just the marketplace. It was everything that had to happen after the button was pressed.</div>
+  </div>
+</section>
+
+<!-- 05 DAILY STATUS -->
+<section id="daily-status" class="chap" data-stage="3">
+  <div class="sec-head">
+    <span class="node">05 · Daily Status</span>
+    <h2>I didn't just build the product. I ran the loop.</h2>
+    <p class="lede"><b>Built and operated a consumer subscription business end to end.</b> A subscription app for India's regional languages, built as a team of one with AI coding agents.</p>
+  </div>
+  <article class="bin big">
+    <div class="tag-b"><span>CRATE 02 · DAILY STATUS</span><span>2026 → now · founder</span></div>
+    <div class="body">
+      <h3>Daily Status</h3>
+      <p class="what">The connection to FirstClub isn't subscriptions. It's that I've owned the entire operating loop, and made decisions with real users, real money and real constraints.</p>
+      <div class="nums">
+        <div class="m"><b>~₹70L</b><span>ARR</span></div>
+        <div class="m"><b>20K+</b><span>transactions</span></div>
+        <div class="m"><b>100K+</b><span>downloads</span></div>
+      </div>
+    </div>
+    <div class="loop">
+      <h4>The loop, all of it mine</h4>
+      <ol>
+        <li><b>Acquisition</b><span>Paid acquisition experiments: campaign strategy, creative testing, cohort performance.</span></li>
+        <li><b>Onboarding</b><span>Designed, shipped and iterated by me.</span></li>
+        <li><b>Product</b><span>Built end to end, as a team of one with AI coding agents.</span></li>
+        <li><b>Monetisation</b><span>Subscription monetisation. A paywall redesign lifted trial-to-paid by ~8 points.</span></li>
+        <li><b>Retention</b><span>Cohort-based retention analysis in Mixpanel; renewals feed LTV.</span></li>
+        <li><b>Analytics</b><span>Unit economics and payback tracking, closing the loop back to acquisition.</span></li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- 06 IQVIA -->
+<section id="iqvia" class="chap" data-stage="3">
+  <div class="sec-head">
+    <span class="node">06 · IQVIA</span>
+    <h2>Complex systems are still products.</h2>
+  </div>
+  <div class="flow" aria-label="IQVIA system story">
+    <span>Legacy system</span><i>→</i><span>Multilingual document processing</span><i>→</i><span>Global scale</span><i>→</i><span>Engineering leadership</span><i>→</i><span class="me">Modernisation</span>
+  </div>
+  <div class="iq">
+    <div class="panel">
+      <h2>Tech lead · 2022–26</h2>
+      <p class="iq-copy">Led 8 engineers through the rebuild of a legacy, global document-processing platform handling multilingual workflows across markets. Defined the architecture, unblocked the team, and kept the system shipping.</p>
+      <div class="tz-nums">
+        <div><b>8</b><span>Engineers led</span></div>
+        <div><b>1M+</b><span>People on the platform</span></div>
+        <div><b>60%</b><span>Faster deploys</span></div>
+      </div>
+    </div>
+    <div class="thesis">I can understand complex technical systems and work closely with engineering, not just write the requirements.</div>
+  </div>
+</section>
+
+<!-- 07 THE ROUTE -->
+<section id="route" class="chap" data-stage="4">
+  <div class="sec-head">
+    <span class="node">07 · The route</span>
+    <h2>Ten nodes. Ten product questions.</h2>
+    <p class="lede">The middle mile moves inventory between nodes. This one moves the shipment from my work into FirstClub's problem. For each node: the question I'd want answered, and the kind of system I'd build to answer it. These are hypotheses about how I'd think, not a description of FirstClub's current systems.</p>
+  </div>
+  <table class="xfer route-map">
+    <thead><tr><th>Node</th><th>The product question</th><th>What I'd build to answer it</th></tr></thead>
+    <tbody>
+      <tr><td>Buying</td><td>How do we decide what should exist in the network?</td><td>Demand forecasting by SKU × Club House × day, feeding a replenishment engine that drafts purchase orders for buyers to approve.</td></tr>
+      <tr><td>Collection / QC</td><td>How do we make quality measurable before it enters the system?</td><td>Grading captured as structured data on every lot (grade, ripeness, expiry), so freshness travels with the inventory.</td></tr>
+      <tr><td>DC</td><td>How do we turn physical inventory into reliable system inventory?</td><td>One inventory source of truth, updated by events (receive, putaway, pick, adjust) rather than end-of-day syncs.</td></tr>
+      <tr><td>Middle mile</td><td>How do we move the right inventory at the right time?</td><td>Allocation and trip planning driven by Club House demand and stock age, not fixed schedules.</td></tr>
+      <tr><td>Club House</td><td>How do we manage freshness, storage, picking and waste?</td><td>FEFO picking and ageing alerts in frontline tools; cycle counts aimed where variance is highest.</td></tr>
+      <tr><td>Inventory</td><td>What should the system actually trust?</td><td>A confidence score per SKU × location, built from cycle-count variance.</td></tr>
+      <tr><td>Capacity</td><td>What can the network realistically fulfil?</td><td>A live capacity model of pickers, riders and slots by time of day.</td></tr>
+      <tr><td>Member promise</td><td>What should we promise the member?</td><td>A decision engine that combines availability, freshness, ETA and confidence. <a href="#engine">Try a toy version ↓</a></td></tr>
+      <tr><td>Delivery</td><td>Did reality match the promise?</td><td>Promise vs actual logged per order, joined to the inventory and capacity state at the moment of promising.</td></tr>
+      <tr><td>Learning</td><td>What would I improve once there's real operating data?</td><td>ETA and spoilage models trained on that history, then agents that handle routine planner decisions once the rules are trusted.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 08 INVENTORY + CAPACITY: PROMISE ENGINE -->
+<section id="engine" class="chap" data-stage="5">
+  <div class="sec-head">
+    <span class="node">08 · Club House → inventory → capacity → promise</span> <span class="node ex">Product exercise · hypothetical scenario</span>
+    <h2>What can we confidently promise the member?</h2>
+    <p class="lede">Given inventory, freshness, capacity, distance and operational uncertainty, a promise here is <b>availability + freshness + ETA + confidence</b>. A fast promise is meaningless if the inventory isn't real, the product isn't fresh, or the operation can't fulfil it.</p>
+    <p class="lede" style="font-size:15px;margin-top:10px">This is an illustrative model with made-up numbers: a hypothetical operating scenario showing how I'd reason about the system. Pick a Club House, a time and an order, then drag the accuracy slider down and watch the engine get more careful.</p>
+  </div>
+
+  <div class="panel controls" aria-label="Order and conditions">
+    <div class="ctl"><span class="lbl">Club House</span><div class="seg" id="ch"></div></div>
+    <div class="ctl"><span class="lbl">Time of day</span><div class="seg" id="slot"></div></div>
+    <div class="ctl"><span class="lbl">Member wants</span><div class="seg" id="need"></div></div>
+    <div class="ctl"><span class="lbl">Avocados</span>
+      <div class="stepper"><button type="button" id="qminus" aria-label="Fewer">−</button><output id="qty" aria-live="polite">2</output><button type="button" id="qplus" aria-label="More">+</button></div>
+    </div>
+    <div class="ctl" style="grid-column:1/-1">
+      <label for="acc">Inventory accuracy at this Club House</label>
+      <div class="acc-row"><input type="range" id="acc" min="50" max="100" step="1" value="97"><span class="acc-val" id="accv">97%</span></div>
+      <div class="hint">How often the system count matches the shelf. Try 97 → 85 → 75 → 55, and walk to the shelf at each. At 85% the dashboard says 7 and the shelf says 5.</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="stack">
+      <section class="panel" id="inventory" data-stage="6"><h2>Inventory <small id="invsub"></small></h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Lot</th><th>Ripeness</th><th class="num">System</th><th class="num">Trusted</th><th class="num">Turns in</th><th>Status</th></tr></thead>
+          <tbody id="inv"></tbody></table></div>
+      </section>
+      <section class="panel" id="capacity" data-stage="7"><h2>Capacity <small id="capsub"></small></h2><div class="cap" id="cap"></div></section>
+      <section class="panel"><h2>Why the engine decided this</h2><ol class="trace" id="trace"></ol></section>
+    </div>
+    <div class="stack">
+      <section class="panel p-promise"><h2>The promise</h2><div class="decision" id="decision"></div><div id="barwrap"></div></section>
+      <section class="panel p-reality"><h2>System check</h2>
+        <p style="margin:0 0 12px;font-size:15px"><b>The dashboard says 7. The shelf says 5. Which one should the promise trust?</b></p><p style="margin:0 0 12px;font-size:14px">A mature promise engine needs to know what it can trust. Send a picker to the shelf and compare a trust-aware promise with one built on the dashboard count alone.</p>
+        <button class="btn" id="walk" type="button">Walk to the shelf</button>
+        <div class="reality" id="reality" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="eng-foot">
+    <div class="note"><b>Deliberately deterministic.</b> A freshness floor, FEFO allocation, a trust haircut from measured inventory accuracy, and a capacity-based ETA, so every decision can be explained in one line. Prediction comes once there's enough history to model ETA, demand and spoilage. This is a toy model of how I think about a more mature promise system, not a comment on anyone's current one.
+      <div class="fine">All Club Houses, lots, counts and timings are fictional and for illustration only. Not FirstClub data.</div></div>
+    <div class="quip">“The dashboard says 97%. The shelf says otherwise.”</div>
+  </div>
+</section>
+
+
+<!-- 09 THE PROMISE -->
+<section id="promise" class="chap" data-stage="8">
+  <div class="sec-head">
+    <span class="node">09 · Member promise</span>
+    <h2>A promise I can explain, not just display.</h2>
+    <p class="lede">The engine above isn't about being faster. It's about being right. Every promise is built from six inputs, and each one can be traced back. When the system isn't confident, it should know not to over-promise.</p>
+  </div>
+  <div class="inputs">
+    <div><b>Availability</b><span>Is it on the shelf?</span></div>
+    <div><b>Freshness</b><span>Will it arrive fresh?</span></div>
+    <div><b>Inventory confidence</b><span>Can we trust the count?</span></div>
+    <div><b>Picker capacity</b><span>Can someone pick it now?</span></div>
+    <div><b>Rider availability</b><span>Can someone carry it now?</span></div>
+    <div><b>Travel time</b><span>How far is the member?</span></div>
+  </div>
+  <div class="principle">A fast promise is meaningless if the inventory isn't real, the product isn't fresh, or the operation can't fulfil it.</div>
+  <p class="quip">“A fast promise is still a bad promise if the avocado is already guacamole.”</p>
+
+</section>
+
+<!-- 10 THE FLOOR TEST -->
+<section id="floor" class="chap" data-stage="9">
+  <div class="sec-head">
+    <span class="node">10 · Delivery</span>
+    <h2>The floor test</h2>
+    <p class="lede">If I owned this system, I'd validate the model against what actually happens on the floor. Did reality match the promise?</p>
+  </div>
+  <div class="notebook">
+    <h3><span>Metrics I'd use to validate the model</span><span class="status">Not FirstClub data · a validation plan</span></h3>
+    <table class="check">
+      <thead><tr><th>Metric</th><th>What it tells the model</th><th>What I'd look for</th></tr></thead>
+      <tbody>
+        <tr><td>Inventory accuracy</td><td>Whether the trust haircut is set right</td><td>Variance by SKU × Club House</td></tr>
+        <tr><td>Fill rate</td><td>How often we deliver what was ordered</td><td>Short picks after a confident promise</td></tr>
+        <tr><td>Promise adherence</td><td>Whether ETAs and buffers are honest</td><td>Where misses cluster by node and hour</td></tr>
+        <tr><td>Freshness at delivery</td><td>Whether the freshness floor holds</td><td>Ageing vs member experience</td></tr>
+        <tr><td>Substitutions</td><td>Gaps the engine didn't see coming</td><td>Repeat SKU / Club House patterns</td></tr>
+        <tr><td>Wastage</td><td>Whether FEFO allocation actually reduces spoilage</td><td>Write-offs by lot age</td></tr>
+        <tr><td>Pick-pack time</td><td>Whether the capacity model is realistic</td><td>Drift at peak hours</td></tr>
+        <tr><td>Throughput per node</td><td>Where capacity really binds</td><td>Orders/hour against the model</td></tr>
+        <tr><td>Cost per order</td><td>Whether a better promise is also affordable</td><td>Cost of buffers, re-picks, failed deliveries</td></tr>
+      </tbody>
+    </table>
+    <div class="hyp-block">
+      <h4>The hypothesis I'd test first</h4>
+      <p class="hyp">Inventory accuracy may be a bigger driver of promise reliability than the ETA shown on screen suggests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 GIVE ME THE SHIPMENT -->
+<section id="plan" class="chap" data-stage="10">
+  <div class="sec-head">
+    <span class="node">11 · Learning</span>
+    <h2>Give me the shipment. I'll figure out the system.</h2>
+    <p class="lede">Use one shipment to understand the system, find the constraint, and build a more mature operating model.</p>
+  </div>
+  <div class="eta">
+    <div>
+      <span class="d">ETA · DAY 30</span>
+      <h3>Understand the system</h3>
+      <p class="chain">Buying → Collection → DC → Middle mile → Club House → Member</p>
+      <p>Walk the entire chain. Map:</p>
+      <ul><li>inventory flow</li><li>information flow</li><li>decision points</li><li>ownership</li><li>operational constraints</li><li>existing metrics</li><li>where manual work happens</li></ul>
+    </div>
+    <div>
+      <span class="d">ETA · DAY 60</span>
+      <h3>Find the lever</h3>
+      <p>Identify the highest-impact constraint. It could be:</p>
+      <ul><li>inventory accuracy</li><li>replenishment</li><li>capacity</li><li>routing</li><li>freshness</li><li>picking</li><li>demand forecasting</li><li>promise reliability</li></ul>
+      <p class="why">Then define one measurable product intervention.</p>
+    </div>
+    <div>
+      <span class="d">ETA · DAY 90</span>
+      <h3>Run the pilot</h3>
+      <p>Ship one controlled improvement in one node, city or category. Define:</p>
+      <ul><li>baseline</li><li>success metric</li><li>experiment</li><li>operational impact</li><li>product impact</li><li>cost impact</li><li>decision: scale or kill</li></ul>
+    </div>
+  </div>
+  <p class="principle small">I wouldn't arrive with a grand strategy. I'd understand the system, find the constraint, ship something, measure it, and scale what works.</p>
+</section>
+
+<!-- 12 WHY ME -->
+<section id="why" class="chap" data-stage="10">
+  <div class="sec-head">
+    <span class="node">12 · Why me</span>
+    <h2>Why this role makes sense</h2>
+    <p class="path" style="margin-top:6px">Engineer <span>→</span> Founder <span>→</span> Product builder <span>→</span> Operator <span>→</span> <span class="next-stop">next stop: supply-chain problem solver</span></p>
+  </div>
+  <div class="eta four">
+    <div><span class="d">01</span><h3>Engineer</h3><p>I understand how complex systems are actually built.</p></div>
+    <div><span class="d">02</span><h3>Founder</h3><p>Built two products from zero without a product org. Worked directly with engineering, lived with ambiguity, made the trade-offs, owned the outcomes.</p></div>
+    <div><span class="d">03</span><h3>Product builder</h3><p>I've taken products from idea → launch → monetisation → iteration.</p></div>
+    <div><span class="d">04</span><h3>Operator</h3><p>The hard part isn't shipping the feature. It's making the system work once reality gets involved.</p></div>
+  </div>
+  <div class="gap-why">
+    <div class="gap"><span class="d">The honest part</span><p>I may not have spent my career inside grocery supply chains.</p></div>
+    <div class="apply"><span class="d">The rest of it</span><p>But I've spent my career building systems where product, technology, operations and business outcomes collide. <b>Give me the shipment, and I'll figure out the system.</b></p></div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="delivered" id="final">
+    <div class="flap"><span>SHIPMENT #FC-SPM-001</span><span>THIS SIDE UP ↑</span></div>
+    <div class="inner">
+      <ul><li>Sourced</li><li>QC'd</li><li>First mile</li><li>Stored</li><li>Middle mile</li><li>Club House</li><li>Inventory trusted</li><li>Capacity checked</li><li>Promise made</li><li>Delivered</li><li>Learned from</li></ul>
+      <div class="st">STATUS: DELIVERED</div>
+      <p class="close"><b>The shipment was never the point.</b><b>The system behind it was.</b></p>
+      <div class="ctas">
+        <a class="btn" href="https://linkedin.com/in/amrita-sarjana-28131a161">Let's talk →</a>
+        <a class="btn alt" href="#engine">Open the Promise Engine ↑</a>
+      </div>
+      <div class="contact"><span>amritasm96@gmail.com</span><button type="button" id="copy">Copy email</button><span id="copied" aria-live="polite"></span></div>
+    </div>
+  </div>
+  <p class="pagefoot">Amrita Sarjana · Bengaluru · Promise Engine data is fictional · Truzell slip figures are illustrative · No FirstClub internal data used</p>
+</section>
+
+</main>
+
+<script>
+/* ---------- Tracker ---------- */
+(function tracker(){
+  const links = [...document.querySelectorAll('#track a')];
+  const secs = [...document.querySelectorAll('[data-stage]')];
+  function update(){
+    const y = window.innerHeight * 0.35; let cur = 0;
+    for (const s of secs){ if (s.getBoundingClientRect().top <= y) cur = +s.dataset.stage; }
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) cur = 10;
+    links.forEach((a,i)=>{ a.classList.toggle('on', i===cur); a.classList.toggle('done', i<cur); a.toggleAttribute('aria-current', i===cur); });
+    const on = links[cur]; if (on && on.parentElement.parentElement.scrollWidth > on.parentElement.parentElement.clientWidth){
+      const ol = on.parentElement.parentElement; ol.scrollLeft = on.offsetLeft - ol.clientWidth/2 + on.offsetWidth/2; }
+  }
+  addEventListener('scroll', update, {passive:true}); addEventListener('resize', update); update();
+})();
+
+/* ---------- Copy email ---------- */
+document.getElementById('copy').onclick = async ()=>{
+  const out = document.getElementById('copied');
+  try { await navigator.clipboard.writeText('amritasm96@gmail.com'); out.textContent = 'Copied'; }
+  catch(e){ out.textContent = 'Select the address to copy it'; }
+};
+
+/* ---------- Promise Engine ---------- */
+
+const STAGES = {
+  Hard:  {color:'var(--hard)',  note:'ripe in 3–4 days'},
+  Firm:  {color:'var(--firm)',  note:'ripe in 1–2 days'},
+  Ready: {color:'var(--ready)', note:'ripe now'},
+  Ripe:  {color:'var(--ripe)',  note:'eat within hours'}
+};
+const CH = {
+  ch07:{label:'CH-07 Indiranagar', short:'CH-07', km:2.1, lots:[
+    {id:'L1', stage:'Ripe',  qty:2, hours:6},
+    {id:'L2', stage:'Ready', qty:4, hours:18},
+    {id:'L3', stage:'Ripe',  qty:3, hours:10},
+    {id:'L4', stage:'Firm',  qty:7, hours:60},
+    {id:'L5', stage:'Hard',  qty:9, hours:96}]},
+  ch12:{label:'CH-12 HSR Layout', short:'CH-12', km:3.4, lots:[
+    {id:'L1', stage:'Ready', qty:1, hours:20},
+    {id:'L2', stage:'Ripe',  qty:2, hours:5},
+    {id:'L3', stage:'Firm',  qty:5, hours:55},
+    {id:'L4', stage:'Hard',  qty:6, hours:100}]},
+  ch19:{label:'CH-19 Whitefield', short:'CH-19', km:4.8, lots:[
+    {id:'L1', stage:'Ripe',  qty:6, hours:14},
+    {id:'L2', stage:'Ready', qty:5, hours:30},
+    {id:'L3', stage:'Firm',  qty:4, hours:70},
+    {id:'L4', stage:'Hard',  qty:10, hours:110}]}
+};
+const SLOTS = {
+  am:  {label:'7 AM',  pickers:3, queue:2, riders:4},
+  noon:{label:'1 PM',  pickers:2, queue:5, riders:2},
+  peak:{label:'8 PM peak', pickers:1, queue:9, riders:0}
+};
+const NEEDS = {
+  today:{label:'Eat today',  stages:['Ripe','Ready'], floor:8,  why:'must stay good for ≥ 8 h after delivery'},
+  later:{label:'In 2–3 days', stages:['Firm','Hard'], floor:48, why:'must not turn within 48 h'}
+};
+const LEVELS = [
+  {min:75, name:'High',   buffer:0, color:'var(--ok)'},
+  {min:55, name:'Medium', buffer:4, color:'var(--warn)'},
+  {min:45, name:'Low',    buffer:8, color:'var(--stamp)'},
+  {min:-1, name:'Too low',buffer:null, color:'var(--stamp)'}
+];
+const state = {ch:'ch07', slot:'am', need:'today', qty:2, acc:97};
+
+function seg(el, opts, key){
+  el.innerHTML = '';
+  for (const [k,v] of Object.entries(opts)){
+    const b = document.createElement('button');
+    b.type='button'; b.textContent = v.label; b.setAttribute('aria-pressed', state[key]===k);
+    b.onclick = ()=>{ state[key]=k; [...el.children].forEach(c=>c.setAttribute('aria-pressed', c===b)); render(); };
+    el.appendChild(b);
+  }
+}
+
+function allocate(elig, q, field){
+  let rem = q; const picks = [];
+  for (const l of elig){ if(!rem) break; const t = Math.min(l[field], rem); if(t>0){ picks.push({id:l.id, n:t, hours:l.hours}); rem -= t; } }
+  return {picks, rem};
+}
+
+function compute(){
+  const ch = CH[state.ch], slot = SLOTS[state.slot], need = NEEDS[state.need], acc = state.acc/100, q = state.qty;
+  const lots = ch.lots.map(l=>({...l, trusted:Math.min(l.qty, Math.round(l.qty*acc)), eligible:false, reason:'', alloc:0}));
+  for (const l of lots){
+    if (!need.stages.includes(l.stage)) l.reason = 'Wrong ripeness';
+    else if (l.hours < need.floor) l.reason = `Below ${need.floor} h floor`;
+    else l.eligible = true;
+  }
+  const elig = lots.filter(l=>l.eligible).sort((a,b)=>a.hours-b.hours);
+  const sysElig = elig.reduce((s,l)=>s+l.qty,0), trustElig = elig.reduce((s,l)=>s+l.trusted,0);
+  const sysAll = lots.reduce((s,l)=>s+l.qty,0), trustAll = lots.reduce((s,l)=>s+l.trusted,0);
+
+  const eng = allocate(elig, q, 'trusted');
+  for (const p of eng.picks) lots.find(l=>l.id===p.id).alloc = p.n;
+  const nUnits = q - eng.rem;
+
+  // capacity → ETA components (minutes)
+  const parts = {
+    queue: Math.round(slot.queue / slot.pickers * 1.5),
+    pick:  +(2 + 0.5*Math.max(nUnits,1) + 1.5).toFixed(1),
+    rider: slot.riders > 0 ? 1 : 7,
+    travel: Math.round(ch.km*3.2) + 2
+  };
+  const base = Math.ceil(parts.queue + parts.pick + parts.rider + parts.travel);
+
+  // confidence
+  const accPen = Math.round((100-state.acc)*1.6);
+  let score = 100 - accPen; const deductions = [];
+  if (accPen) deductions.push(`−${accPen} accuracy (${state.acc}%)`);
+  const margin = trustElig - q;
+  if (eng.rem===0 && margin===0){ score -= 15; deductions.push('−15 zero spare units'); }
+  if (slot.riders===0){ score -= 15; deductions.push('−15 no rider nearby'); }
+  if (eng.picks.some(p=>p.hours<12)){ score -= 10; deductions.push('−10 allocated fruit turns in < 12 h'); }
+  score = Math.max(0, Math.min(100, score));
+  const level = LEVELS.find(L=>score>=L.min);
+
+  let decision;
+  if (elig.length===0 || trustElig===0) decision = 'none';
+  else if (level.buffer===null) decision = 'hold';
+  else if (eng.rem>0) decision = 'partial';
+  else decision = 'promise';
+  const promised = level.buffer===null ? null : base + level.buffer;
+
+  // naive engine: trusts system count, no buffer, always promises if system says so
+  const naive = allocate(elig, q, 'qty');
+
+  // reality: phantom units, concentrated in the softest fruit first (gets bruised, binned, mis-slotted)
+  const phantomTotal = Math.round(sysAll * (1-acc));
+  const physical = {}; lots.forEach(l=>physical[l.id]=l.qty);
+  let ph = phantomTotal;
+  for (const l of [...lots].sort((a,b)=>a.hours-b.hours)){ if(!ph) break; const t=Math.min(ph, physical[l.id]); physical[l.id]-=t; ph-=t; }
+
+  return {ch, slot, need, q, lots, elig, sysElig, trustElig, sysAll, trustAll, eng, nUnits, parts, base, score, deductions, level, decision, promised, naive, physical, phantomTotal};
+}
+
+function shelfRun(r, picks){
+  const avail = {...r.physical}; let repicks = 0, short = 0;
+  for (const p of picks){
+    const have = Math.min(avail[p.id], p.n); avail[p.id] -= have; let need = p.n - have;
+    if (need>0){
+      for (const l of r.elig){ if(!need) break; if(l.id===p.id) continue;
+        const reserved = picks.filter(x=>x.id===l.id).reduce((s,x)=>s+x.n,0);
+        const spare = Math.max(0, avail[l.id] - reserved);
+        const t = Math.min(spare, need); if(t>0){ avail[l.id]-=t; need-=t; repicks++; } }
+      short += need;
+    }
+  }
+  return {repicks, short, actual: r.base + repicks*2};
+}
+
+function render(){
+  const r = compute();
+  document.getElementById('qty').textContent = state.qty;
+  document.getElementById('accv').textContent = state.acc + '%';
+  document.getElementById('invsub').textContent = `${r.ch.label} · ${r.sysAll} units on system`;
+  document.getElementById('capsub').textContent = r.slot.label;
+
+  // inventory table
+  document.getElementById('inv').innerHTML = r.lots.map(l=>{
+    const cls = l.alloc ? 'alloc' : (l.eligible ? '' : 'excluded');
+    const status = l.alloc ? `<span class="tag ok">${r.decision==='hold'?'Reserved':'Allocated'} ×${l.alloc}</span>`
+      : l.eligible ? `<span class="tag el">Eligible</span>` : `<span class="tag no">${l.reason}</span>`;
+    const cut = l.trusted < l.qty ? ` <span class="haircut">−${l.qty-l.trusted}</span>` : '';
+    return `<tr class="${cls}"><td>${l.id}</td><td><span class="dot" style="background:${STAGES[l.stage].color}"></span>${l.stage}</td>
+      <td class="num">${l.qty}</td><td class="num">${l.trusted}${cut}</td><td class="num">${l.hours} h</td><td>${status}</td></tr>`;
+  }).join('');
+
+  // capacity
+  const s = r.slot;
+  document.getElementById('cap').innerHTML = `
+    <div class="${s.pickers<2?'bad':''}"><b>${s.pickers}</b><span>Pickers free</span></div>
+    <div class="${s.queue>6?'bad':''}"><b>${s.queue}</b><span>Orders queued</span></div>
+    <div class="${s.riders===0?'bad':''}"><b>${s.riders}</b><span>Riders nearby</span></div>
+    <div><b>${r.ch.km}</b><span>km to member</span></div>`;
+
+  // decision
+  const d = document.getElementById('decision');
+  d.className = 'decision ' + r.decision;
+  const allocTxt = r.eng.picks.length ? r.eng.picks.map(p=>`${p.id} ×${p.n}`).join(' + ') : 'none';
+  const confRow = `<dt>Confidence</dt><dd><div class="conf"><span>${r.level.name} · ${r.score}</span><div class="meter"><i style="width:${r.score}%;background:${r.level.color}"></i></div></div></dd>`;
+  if (r.decision==='promise'){
+    d.innerHTML = `<div class="kicker">Promise to member · ${r.q} × avocado · ${r.need.label.toLowerCase()}</div>
+      <div class="p4"><div><span>Availability</span><b>${r.q}/${r.q}</b><i>trusted stock</i></div><div><span>Freshness</span><b>${Math.min(...r.eng.picks.map(p=>p.hours))}h+</b><i>after picking</i></div><div class="eta-t"><span>ETA</span><b>${r.promised}<small> min</small></b><i>${r.level.buffer?'incl. +'+r.level.buffer+' buffer':'no buffer'}</i></div><div><span>Confidence</span><b style="color:${r.level.color}">${r.score}</b><i>${r.level.name}</i></div></div>
+      <dl class="facts"><dt>Stock</dt><dd>${r.trustElig} trusted of ${r.sysElig} on dashboard</dd>
+      <dt>Capacity</dt><dd>${r.slot.pickers} picker(s) free · ${r.slot.riders} rider(s) nearby</dd>
+      <dt>Allocation</dt><dd>${allocTxt}</dd><dt>Reason</dt><dd>FEFO + ripeness match</dd>
+      <dt>Buffer</dt><dd>${r.level.buffer ? '+'+r.level.buffer+' min because confidence is below High' : 'None: confidence is High'}</dd></dl>`;
+  } else if (r.decision==='partial'){
+    d.innerHTML = `<div class="kicker">Partial promise</div><div class="big">${r.nUnits} of ${r.q} · ${r.promised} min</div>
+      <dl class="facts"><dt>Allocation</dt><dd>${allocTxt}</dd>
+      <dt>Gap</dt><dd>${r.sysElig>=r.q ? `System says ${r.sysElig}, engine trusts ${r.trustElig}. Won't promise units that may not exist.` : `Only ${r.trustElig} trusted unit(s) match "${r.need.label}".`}</dd>
+      <dt>Offer</dt><dd>${r.need.label==='Eat today' ? 'Rest as Firm (ripe in 1–2 days), or notify on restock' : 'Rest from next inbound, or notify'}</dd>${confRow}</dl>`;
+  } else if (r.decision==='hold'){
+    d.innerHTML = `<div class="kicker">Decision</div><div class="big">Not promising a time</div>
+      <dl class="facts"><dt>Why</dt><dd>Confidence ${r.score} is below the floor of 45. Any ETA would be a guess.</dd>
+      <dt>Member sees</dt><dd>"Confirming stock, we'll update you in 2 min" while a picker verifies the shelf</dd>${confRow}</dl>`;
+  } else {
+    d.innerHTML = `<div class="kicker">Decision</div><div class="big">Unavailable for this need</div>
+      <dl class="facts"><dt>Why</dt><dd>No lot here ${r.need.why}.</dd>
+      <dt>Offer</dt><dd>${r.need.label==='Eat today' ? 'Firm avocados (ripe in 1–2 days), or try another Club House' : 'Ready-to-eat instead, or notify on next inbound'}</dd></dl>`;
+  }
+
+  // ETA bar
+  const bw = document.getElementById('barwrap');
+  if (r.promised){
+    const segs = [['Queue',r.parts.queue,'#7a6a5a'],['Pick+pack',r.parts.pick,'#4f6b2c'],['Rider',r.parts.rider,'#8c6d2a'],['Travel',r.parts.travel,'#1f1b16'],['Buffer',r.level.buffer,'#c0392b']].filter(x=>x[1]>0);
+    const tot = segs.reduce((a,x)=>a+x[1],0);
+    bw.innerHTML = `<div class="bar" role="img" aria-label="ETA breakdown">${segs.map(x=>`<span style="width:${x[1]/tot*100}%;background:${x[2]}" title="${x[0]} ${x[1]} min">${x[1]>=3?Math.round(x[1]):''}</span>`).join('')}</div>
+      <div class="legend">${segs.map(x=>`<span><i style="background:${x[2]}"></i>${x[0]} ${x[1]} min</span>`).join('')}</div>`;
+  } else bw.innerHTML = '';
+
+  // trace
+  const excl = r.lots.filter(l=>!l.eligible && r.need.stages.includes(l.stage));
+  const steps = [];
+  steps.push(`<b>Freshness filter.</b> "${r.need.label}" accepts ${r.need.stages.join(' / ')} that ${r.need.why}. ${excl.length ? 'Excluded '+excl.map(l=>`${l.id} (turns in ${l.hours} h)`).join(', ')+': it would arrive fine and be guacamole by dinner.' : 'Nothing excluded on freshness.'}`);
+  steps.push(`<b>Trust haircut.</b> Shelf matches system ${state.acc}% of the time here, so the engine trusts <b>${r.trustElig}</b> of ${r.sysElig} eligible units${r.sysElig>r.trustElig?` and ignores ${r.sysElig-r.trustElig} that may be phantom`:''}.`);
+  steps.push(r.eng.picks.length ? `<b>Allocate FEFO.</b> ${allocTxt}: the soonest-to-turn fruit that still clears the floor, so it sells before it spoils.` : `<b>Allocate.</b> Nothing trusted to allocate.`);
+  steps.push(`<b>Capacity.</b> ${s.pickers} picker(s), ${s.queue} queued → ~${r.parts.queue} min before the pick starts. ${s.riders ? s.riders+' rider(s) nearby.' : 'No rider nearby: +7 min to assign one.'}`);
+  steps.push(`<b>Confidence ${r.score}.</b> ${r.deductions.length ? r.deductions.join(', ')+'.' : 'No deductions.'} ${r.level.buffer===null ? 'Below 45: refuse to quote an ETA.' : r.level.buffer ? `${r.level.name} → add ${r.level.buffer} min buffer.` : 'High → quote the raw ETA.'}`);
+  document.getElementById('trace').innerHTML = steps.map(x=>`<li>${x}</li>`).join('');
+
+  document.getElementById('reality').className = 'reality';
+  document.getElementById('reality').innerHTML = '';
+}
+
+function walk(){
+  const r = compute();
+  const box = document.getElementById('reality');
+  const diffs = r.lots.filter(l=>r.physical[l.id] !== l.qty);
+  const physElig = r.elig.reduce((a,l)=>a+r.physical[l.id],0);
+  let html = `<p class="dash-vs"><span>Dashboard says <b>${r.sysElig}</b></span><span>Shelf says <b>${physElig}</b></span><span>Engine trusted <b>${r.trustElig}</b></span></p><ul class="shelf">${diffs.length ? diffs.map(l=>`<li>${l.id} · system ${l.qty} → shelf <b>${r.physical[l.id]}</b> <s>${l.qty-r.physical[l.id]} phantom</s></li>`).join('') : '<li>Every lot matches the system. Lovely.</li>'}</ul>`;
+
+  // this engine
+  let mine;
+  if (r.decision==='promise' || r.decision==='partial'){
+    const run = shelfRun(r, r.eng.picks);
+    const held = run.short===0 && run.actual<=r.promised;
+    mine = `<div><h3>Trust-aware promise</h3><div class="res ${held?'good':'badr'}">${held?'Promise held':'Promise broken'}</div>
+      <p>Promised ${r.promised} min${r.decision==='partial'?` for ${r.nUnits}`:''}. ${run.short ? `Short ${run.short} on the shelf.` : `Delivered in ${run.actual} min${run.repicks?` after ${run.repicks} re-pick(s)`:''}.`}</p></div>`;
+  } else if (r.decision==='hold'){
+    mine = `<div><h3>Trust-aware promise</h3><div class="res neutral">Checked first</div><p>Verified the shelf before quoting a time. The member waits 2 min for a reliable answer.</p></div>`;
+  } else {
+    mine = `<div><h3>Trust-aware promise</h3><div class="res neutral">Offered a swap</div><p>No eligible stock, so no false promise.</p></div>`;
+  }
+
+  // naive engine
+  let theirs;
+  if (r.naive.rem>0){
+    theirs = `<div><h3>Dashboard-count promise</h3><div class="res neutral">Unavailable</div><p>Even the dashboard count can't cover it.</p></div>`;
+  } else {
+    const run = shelfRun(r, r.naive.picks);
+    const held = run.short===0 && run.actual<=r.base;
+    theirs = `<div><h3>Dashboard-count promise</h3><div class="res ${held?'good':'badr'}">${held?'Promise held':'Promise broken'}</div>
+      <p>Promised ${r.base} min. ${run.short ? `Picker finds ${run.short} missing. Member gets a cancellation call.` : held ? `Delivered in ${run.actual} min.` : `Delivered in ${run.actual} min, ${run.actual-r.base} min late.`}</p></div>`;
+  }
+  html += `<div class="vs">${mine}${theirs}</div>`;
+  box.innerHTML = html; box.className = 'reality show';
+}
+
+seg(document.getElementById('ch'), Object.fromEntries(Object.entries(CH).map(([k,v])=>[k,{label:v.short}])), 'ch');
+seg(document.getElementById('slot'), SLOTS, 'slot');
+seg(document.getElementById('need'), NEEDS, 'need');
+document.getElementById('qminus').onclick = ()=>{ if(state.qty>1){state.qty--; render();} };
+document.getElementById('qplus').onclick  = ()=>{ if(state.qty<4){state.qty++; render();} };
+document.getElementById('acc').oninput = e=>{ state.acc = +e.target.value; render(); };
+document.getElementById('walk').onclick = walk;
+render();
+
+</script>
+</body>
+</html>
